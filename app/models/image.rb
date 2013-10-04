@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :url, :uploader
   validates :url, :presence => true
 
   belongs_to(
