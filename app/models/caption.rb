@@ -2,7 +2,19 @@ class Caption < ActiveRecord::Base
   # attr_accessible :title, :body
   validate :top_and_bottom_captions_not_both_blank
 
+  belongs_to(
+    :image,
+    :foreign_key => :image_id,
+    :primary_key => :id,
+    :class_name => "Image"
+  )
 
+  belongs_to(
+    :captioner,
+    :foreign_key => :captioner_id,
+    :primary_key => :id,
+    :class_name => "User"
+  )
 
   private
 

@@ -4,5 +4,19 @@ class User < ActiveRecord::Base
       validates attribute :presence => true, :uniquesness => true
   end
 
+  has_many(
+    :images
+    :foreign_key => :uploader_id,
+    :primary_key => :id,
+    :class_name => "Image"
+  )
+
+  has_many(
+    :captions,
+    :foreign_key => :captioner_id,
+    :primary_key => :id,
+    :class_name => "Caption"
+  )
+
 
 end
