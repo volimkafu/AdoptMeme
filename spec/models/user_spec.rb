@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  subject(:user) { User.create(email: "jennifer@gmail.com", username: "jen", zipcode: 32444 ) }
+  subject(:user) { User.create(email: "jennifer@gmail.com", username: "jen") }
 
   it { should be_valid }
   it { should respond_to(:email) }
@@ -11,18 +11,35 @@ describe User do
   it { should respond_to(:captions) }
 
   describe "validations" do
-    it "should not allow invalid zipcodes to be saved" do
-      user2 = User.new( email: "hello@gmail.com", username: "susan", zipcode: 4355432 )
-      user2.should_not be_valid
+    context "should not allow invalid zipcodes to be saved" do
+      it "doesn't allow zipcodes under 5 digits" do
+        user.zipcode = 9000 
+        user.should_not be_valid
+      end
+
+      it "doesn't allow zipcodes with more than 5 digits" do
+        user.zipcode = 100000
+        user.should_not be_valid
+      end
+
+      it "doesn't allow non-numeric zipcodes" do
+        user.zipcode = "hello"
+        user.should_not be_valid
+      end
+
+      it "doesn't allow non-integer zipcodes" do
+        user.zipcode = "1234.5"
+        user.should_not be_valid
+      end
     end
 
     it "should not allow users to be created using emails already in use." do
-      user2 = User.new( email: "jennifer@gmail.com", username: "Sarah", zipcode: 32444 ) 
+      user2 = User.new(email: user.email, username: "Sarah") 
       user2.should_not be_valid
     end
 
     it "should not allow user creation with duplicate user names." do
-      user2 = User.new( email: "jennifer@gmail.com", username: "jen", zipcode: 32444 ) 
+      user2 = User.new(email: "example@gmail.com", username: user.username)
       user2.should_not be_valid
     end
   end
