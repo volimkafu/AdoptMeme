@@ -1,6 +1,6 @@
 class Image < ActiveRecord::Base
-  attr_accessible :url, :uploader
-  validates :url, :presence => true
+  attr_accessible :uri, :uploader
+  validates :uri, :presence => true
 
   belongs_to(
     :uploader,
