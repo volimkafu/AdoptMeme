@@ -1,7 +1,7 @@
 class Caption < ActiveRecord::Base
-  attr_accessible :image, :top_text, :bottom_text, :captioner
-
+  validates :captioner, :image, :presence => true
   validate :top_and_bottom_captions_not_both_blank
+  
 
   belongs_to(
     :image,
@@ -20,7 +20,7 @@ class Caption < ActiveRecord::Base
   private
 
     def top_and_bottom_captions_not_both_blank
-      if :top_text.blank? && :bottom_text.blank?
+      if top_text.blank? && bottom_text.blank?
         errors[:top_text] << "Both text fields cannot be blank."
       end
     end

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   end
     
   validates :zipcode, :format => { :with => /^\d{5}$/ }
-
+  
   has_many(
     :images,
     :foreign_key => :uploader_id,
@@ -20,8 +20,6 @@ class User < ActiveRecord::Base
     :primary_key => :id,
     :class_name => "Caption"
   )
-
-  private
 
 
 
