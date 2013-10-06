@@ -4,13 +4,7 @@ class User < ActiveRecord::Base
   [:email, :username].each do |attribute|
       validates attribute, :presence => true, :uniqueness => true
   end
-  
-#  validates :zipcode, 
-#    :numericality => 
-#      {:only_integer => true, 
-#       :greater_than => 9999,
-#       :less_than => 100000 }
-  
+    
   validates :zipcode, :format => { :with => /^\d{5}$/ }
 
   has_many(
