@@ -1,8 +1,17 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :username, :zipcode
+
   [:email, :username].each do |attribute|
       validates attribute, :presence => true, :uniqueness => true
   end
+  
+#  validates :zipcode, 
+#    :numericality => 
+#      {:only_integer => true, 
+#       :greater_than => 9999,
+#       :less_than => 100000 }
+  
+  validates :zipcode, :format => { :with => /^\d{5}$/ }
 
   has_many(
     :images,
@@ -17,6 +26,9 @@ class User < ActiveRecord::Base
     :primary_key => :id,
     :class_name => "Caption"
   )
+
+  private
+
 
 
 end
