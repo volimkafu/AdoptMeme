@@ -1,0 +1,11 @@
+<div class="hero-unit">
+<h1>Hello, world!</h1>
+<p>
+	<% @users.each do |user| %>
+
+	<li> <%= "#{user.email} #{user.zipcode}" %> </li>
+
+	<% end %>
+</p>
+</div>
+
