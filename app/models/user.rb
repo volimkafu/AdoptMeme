@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :username, :zipcode
+  attr_accessible :email, :username, :zipcode, :fname, :lname
 
   [:email, :username].each do |attribute|
       validates attribute, :presence => true, :uniqueness => true
