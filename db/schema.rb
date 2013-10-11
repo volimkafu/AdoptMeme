@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131006005129) do
+ActiveRecord::Schema.define(:version => 20131011044201) do
 
   create_table "captions", :force => true do |t|
     t.string   "top_text"
@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(:version => 20131006005129) do
     t.string   "username"
     t.string   "fname"
     t.string   "lname"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.string   "zipcode",    :default => "00000"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "zipcode",         :default => "00000"
+    t.string   "password_digest"
   end
 
 end
