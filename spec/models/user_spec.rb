@@ -9,6 +9,15 @@ describe User do
   it { should respond_to(:username) }
   it { should respond_to(:images) }
   it { should respond_to(:captions) }
+  
+  it "should not expose the password hash" do
+    user.should_not respond_to(:password_digest)
+    user.should_not respond_to(:password) 
+  end
+  
+  it "should allow the password to be changed" do
+    user.should respond_to(:password=) 
+  end
 
   describe "validations" do
     context "should not allow invalid zipcodes to be saved" do
