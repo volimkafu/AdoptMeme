@@ -17,4 +17,9 @@ module ApplicationHelper
     user.reset_session_token
     user.save
   end
+  
+  def authenticate 
+    # use with before_filter
+    redirect_to new_session_url unless logged_in?
+  end
 end
