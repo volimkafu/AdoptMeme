@@ -15,6 +15,23 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
   
+  
+  def self.find_by_token(token)
+    User.where(:session_token => token).first
+  end
+  
+  def self.find_by_credentials(username_or_email, password)
+    user = User.where(:email => username_or_email).first
+    return user if (!!user && user.is_password?(password))
+    user = User.where(:username => username_or_email).first
+    return user if (!!user && user.is_password?(password))  
+    nil
+  end
+  
+  def reset_session_token
+    self.session_token = SecureRandom.urlsafe_base64(32)
+  end
+  
   has_many(
     :images,
     :foreign_key => :uploader_id,
