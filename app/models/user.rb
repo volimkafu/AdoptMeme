@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
     
   validates :zipcode, :format => { :with => /^\d{5}$/ }
   
+  def password=(password)
+    self.password_digest = BCrypt::Password.create(password)
+  end
+  
+  def is_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
+  
   has_many(
     :images,
     :foreign_key => :uploader_id,
