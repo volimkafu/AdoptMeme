@@ -12,6 +12,8 @@ group :development do
   gem 'capybara'
   gem 'pry-rails'
   gem 'sqlite3'
+  gem 'launchy'
+  gem 'letter_opener'
 end
 
 # Gems used only for assets and not required
