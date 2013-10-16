@@ -22,10 +22,10 @@ class User < ActiveRecord::Base
 
   def self.find_by_credentials(user_hash)
     if user.keys.include?(:email)
-      user = User.where(:email => user[:email]).first
+      user = User.where(:email => user_hash[:email]).first
       return user if (!!user && user.is_password?(password))
     elsif user.keys.include?(:username)
-      user = User.where(:username => username_or_email).first
+      user = User.where(:username => user_hash[:username]).first
       return user if (!!user && user.is_password?(password))
     end
 
