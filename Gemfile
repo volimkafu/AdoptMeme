@@ -15,6 +15,8 @@ group :development do
   gem 'launchy'
   gem 'letter_opener'
   gem 'rails-erd'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Gems used only for assets and not required
