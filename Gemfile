@@ -14,6 +14,7 @@ group :development do
   gem 'sqlite3'
   gem 'launchy'
   gem 'letter_opener'
+  gem 'rails-erd'
 end
 
 # Gems used only for assets and not required
