@@ -1,18 +1,16 @@
 class UsersController < ApplicationController
+  before_filter :authenticate
+
   def index
     @users = User.all
-    if params[:format] == "json" 
-      render :json => @users
-    else
-      render :index
-    end
+    render :index
   end
-  
+
   def new
     @user = User.new
     render :new
   end
-  
+
   def create
     @user = User.create(params[:user])
     if @user.save
