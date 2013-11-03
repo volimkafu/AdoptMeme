@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
 
-  [:email, :username].each do |attribute|
-      validates attribute, :presence => true, :uniqueness => true
-  end
+  validates :email, :presence => true, :uniqueness => true
 
   validates :zipcode, :format => { :with => /^\d{5}$/ }
 
@@ -14,22 +12,15 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
-
   def self.find_by_token(token)
     User.where(:session_token => token).first
   end
 
   def self.find_by_credentials(user_hash)
     password = user_hash[:password]
+    user = User.where(:email => user_hash[:email]).first
 
-    if user_hash.keys.include?(:email)
-      user = User.where(:email => user_hash[:email]).first
-      return user if (!!user && user.is_password?(password))
-    elsif user_hash.keys.include?(:username)
-      user = User.where(:username => user_hash[:username]).first
-      return user if (!!user && user.is_password?(password))
-    end
-
+    return user if (!!user && user.is_password?(password))
     nil
   end
 
@@ -50,7 +41,4 @@ class User < ActiveRecord::Base
     :primary_key => :id,
     :class_name => "Caption"
   )
-
-
-
 end
