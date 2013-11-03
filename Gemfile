@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'addressable'
 gem 'bootstrap-sass', '~> 2.3.2.1'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'figaro'
 gem 'jquery-rails'
 gem 'rails', '3.2.12'
+gem 'rest-client'
 
 group :development do
   gem 'better_errors'
