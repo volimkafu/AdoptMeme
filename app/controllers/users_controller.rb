@@ -12,12 +12,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params[:user])
+    @user = User.create(user_params)
     if @user.save
       redirect_to users_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
     end
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 end

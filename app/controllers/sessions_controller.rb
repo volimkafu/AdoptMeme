@@ -19,4 +19,9 @@ class SessionsController < ApplicationController
     flash.now[:notices] = ['Goodbye, #{self.current_user.username}. Come again soon!']
     redirect_to new_session_url
   end
+
+  private
+  def session_params
+    params.require(:user).permit(:username, :password)
+  end
 end
