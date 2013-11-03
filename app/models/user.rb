@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :username, :zipcode, :fname, :lname
 
   [:email, :username].each do |attribute|
       validates attribute, :presence => true, :uniqueness => true
@@ -21,10 +20,12 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_credentials(user_hash)
-    if user.keys.include?(:email)
+    password = user_hash[:password]
+
+    if user_hash.keys.include?(:email)
       user = User.where(:email => user_hash[:email]).first
       return user if (!!user && user.is_password?(password))
-    elsif user.keys.include?(:username)
+    elsif user_hash.keys.include?(:username)
       user = User.where(:username => user_hash[:username]).first
       return user if (!!user && user.is_password?(password))
     end
