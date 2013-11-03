@@ -16,3 +16,6 @@
 
 .DS_Store
 *.pdf
+
+# Ignore application configuration
+/config/application.yml
