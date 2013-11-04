@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'addressable'
-gem 'bootstrap-sass', '~> 2.3.2.1'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'figaro'
 gem 'jquery-rails'
