@@ -1,6 +1,6 @@
 class Pet < ActiveRecord::Base
 
-  has_many :images
+  has_many :images, :inverse_of => :pet
 
   @@petfinder_api_key = ENV["PETFINDER_API_KEY"]
   @@petfinder_secret_key = ENV["PETFINDER_API_SECRET"]
@@ -48,15 +48,10 @@ class Pet < ActiveRecord::Base
       pet_record["media"]["photos"]["photo"].each do |photo|
         if photo["@size"] == "x"
           petfinder_image_path = photo["$t"]
-          pet.images << Image.new(uri: petfinder_image_path, source: "petfinder")
+          pet.images << Image.create(petfinder_url: petfinder_image_path)
         end
       end
 
     end
-    # Find petfinder image url
-    # GET request to petfinder image url.
-    # POST request that content to Amazon AWS
-    # Create Pet record with petfinder pet id, and Image records with
-    # ["petfinder"]["pet"][0]["media"]["photos"]["photo"][0].values.include?("x")
   end
 end

@@ -1,8 +1,9 @@
 class Image < ActiveRecord::Base
   attr_accessible :uri, :uploader
-  validates :uri, :presence => true
 
-  belongs_to :pet
+  validates :petfinder_url, :pet_id, :presence => true
+
+  belongs_to :pet, :inverse_of => :images
 
   has_many(
     :captions,
