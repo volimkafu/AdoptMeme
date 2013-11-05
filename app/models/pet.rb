@@ -28,6 +28,10 @@ class Pet < ActiveRecord::Base
     ).to_s
 
     payload = RestClient.get(petfinder_url)
-    JSON.parse(payload)
+    parsePets(JSON.parse(payload))
+  end
+
+  def parsePets
+    # ["petfinder"]["pet"][0]["media"]["photos"]["photo"][0].values.include?("x")
   end
 end
