@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131103073108) do
+ActiveRecord::Schema.define(:version => 20131105213538) do
 
   create_table "captions", :force => true do |t|
     t.string   "top_text"
@@ -23,11 +23,14 @@ ActiveRecord::Schema.define(:version => 20131103073108) do
   end
 
   create_table "images", :force => true do |t|
-    t.integer  "uploader_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "uri"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "petfinder_url"
+    t.string   "amazon_aws_url"
+    t.integer  "pet_id"
   end
+
+  add_index "images", ["pet_id"], :name => "index_images_on_pet_id"
 
   create_table "pets", :force => true do |t|
     t.datetime "created_at", :null => false
