@@ -2,6 +2,8 @@ require 'addressable/uri'
 
 class Pet < ActiveRecord::Base
 
+  has_many :images
+
   @@petfinder_api_key = ENV["PETFINDER_API_KEY"]
   @@petfinder_secret_key = ENV["PETFINDER_API_SECRET"]
 
@@ -17,13 +19,15 @@ class Pet < ActiveRecord::Base
     petfinder_url = Addressable::URI.new(
       scheme: "http",
       host: "api.petfinder.com",
-      path: "pet.getRandom",
+      path: "pet.getPets",
       query_values: {
         :key => @@petfinder_api_key,
         :format => :json,
         :output => :full,
         :animal => :cat,
-        :zipcode => 94103
+        :status => :A, # A = Adoptable
+        :location => 94103,
+        :count => 100  # number of records to return
       }
     ).to_s
 
