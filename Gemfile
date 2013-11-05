@@ -9,6 +9,7 @@ gem 'rails', '3.2.12'
 gem 'rest-client'
 
 group :development do
+  gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'capybara'
