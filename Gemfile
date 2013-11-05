@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 gem 'addressable'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'figaro'
