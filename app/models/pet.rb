@@ -30,10 +30,33 @@ class Pet < ActiveRecord::Base
     ).to_s
 
     payload = RestClient.get(petfinder_url)
-    parsePets(JSON.parse(payload))
+    Pet.parse_pets(JSON.parse(payload))
   end
 
-  def parsePets
+  def self.parse_pets(payload)
+    payload["petfinder"]["pet"].each do |pet_record|
+      pet = Pet.new
+      pet.name = pet_record["name"]["$t"]
+      pet.sex = pet_record["sex"]["$t"]
+      pet.petfinder_id = pet_record["id"]["$t"]
+      pet.shelter_id = pet_record["shelterId"]["$t"]
+      pet.description = pet_record["description"]["$t"]
+      pet.save!
+
+
+      # Also store references to full-resolution pet photos
+      pet_record["media"]["photos"]["photo"].each do |photo|
+        if photo["@size"] == "x"
+          petfinder_image_path = photo["$t"]
+          pet.images << Image.new(uri: petfinder_image_path, source: "petfinder")
+        end
+      end
+
+    end
+    # Find petfinder image url
+    # GET request to petfinder image url.
+    # POST request that content to Amazon AWS
+    # Create Pet record with petfinder pet id, and Image records with
     # ["petfinder"]["pet"][0]["media"]["photos"]["photo"][0].values.include?("x")
   end
 end
