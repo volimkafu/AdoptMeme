@@ -47,5 +47,6 @@ nd sharing funny cat pictures you are also helping animals in need.
   feature that is unlikely to be discovered by employers playing with the app
   for <5 minutes.
 - Caching?  Read about redis.
+- Endless scrolling on index page.
 
 
