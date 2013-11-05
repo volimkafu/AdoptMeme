@@ -1,5 +1,3 @@
-require 'addressable/uri'
-
 class Pet < ActiveRecord::Base
 
   has_many :images
@@ -19,7 +17,7 @@ class Pet < ActiveRecord::Base
     petfinder_url = Addressable::URI.new(
       scheme: "http",
       host: "api.petfinder.com",
-      path: "pet.getPets",
+      path: "pet.find",
       query_values: {
         :key => @@petfinder_api_key,
         :format => :json,
