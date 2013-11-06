@@ -27,7 +27,7 @@ class Pet < ActiveRecord::Base
         :animal => :cat,
         :status => :A, # A = Adoptable
         :location => 94103,
-        :count => 20  # number of records to return
+        :count => 50  # number of records to return
       }
     ).to_s
 
@@ -45,7 +45,6 @@ class Pet < ActiveRecord::Base
       pet.description = pet_record["description"]["$t"]
       pet.save!
 
-
       # Also store references to full-resolution pet photos
       pet_record["media"]["photos"]["photo"].each do |photo|
         if photo["@size"] == "x"
@@ -55,6 +54,7 @@ class Pet < ActiveRecord::Base
         end
       end
 
+      pet.delete if pet.images.empty?
     end
   end
 end
