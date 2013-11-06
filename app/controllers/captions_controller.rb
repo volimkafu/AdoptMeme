@@ -1,4 +1,9 @@
 class CaptionsController < ApplicationController
+  def index
+    @captions = Caption.all
+    render :index
+  end
+
   def new
     @pet = Pet.find(params[:petid])
     render :new
