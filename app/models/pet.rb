@@ -1,4 +1,5 @@
 class Pet < ActiveRecord::Base
+  validates :name, :petfinder_id, :shelter_id, :presence => true
 
   has_many :images, :inverse_of => :pet
 
