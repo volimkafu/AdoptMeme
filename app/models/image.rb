@@ -2,7 +2,6 @@ class Image < ActiveRecord::Base
   validates :petfinder_url, :pet_id, :presence => true
 
   after_create :push_image_to_aws
-  handle_asynchronously :create_aws_object
 
   belongs_to :pet
   has_many :captions, :inverse_of => :image
@@ -13,6 +12,7 @@ class Image < ActiveRecord::Base
     bucket = s3.bucket[:adoptmeme]
     bucket.objects[name].write(content)
   end
+  handle_asynchronously :create_aws_object
 
   def push_image_to_aws
     image = RestClient.get(self.petfinder_url)
