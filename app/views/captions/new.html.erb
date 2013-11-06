@@ -1,0 +1,13 @@
+<div class="container">
+  <h1> <%= @pet.name %> </h1>
+
+  <form action="post">
+    <input type="text" name="caption[toptext]" placeholder="Top text">
+  <br>
+    <img src="<%= @pet.images.first.amazon_aws_url %>">
+  <br>
+    <input type="text" name="caption[bottomtext]" placeholder="Bottom text">
+  <input type="submit">
+  </form>
+
+</div>
