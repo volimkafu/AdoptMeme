@@ -1,1 +1,5 @@
 <h1>Pet's Index Page</h1>
+
+<% @pets.shuffle.each do |pet| %>
+  <img src="<%= pet.images.sample.amazon_aws_url %>" style="height: 250px">
+<% end %>

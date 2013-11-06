@@ -1,6 +1,6 @@
 class PetsController < ApplicationController
   def index
-    @pets = Pet.limit(10)
+    @pets = Pet.limit(50)
     render :index
   end
 
