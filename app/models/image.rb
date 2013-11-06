@@ -2,6 +2,7 @@ class Image < ActiveRecord::Base
   validates :petfinder_url, :pet_id, :presence => true
 
   after_create :push_image_to_aws
+  after_destroy :delete_pets_without_images
 
   belongs_to :pet
   has_many :captions, :inverse_of => :image
@@ -28,14 +29,21 @@ class Image < ActiveRecord::Base
     end
   end
 
-  def aws_id
-    # Sequential ids are disfavored on S3 for performance reasons.
-    # So we reverse the id.
-    self.id.to_s.reverse
-  end
+  private
+    def aws_id
+      # Sequential ids are disfavored on S3 for performance reasons.
+      # So we reverse the id.
+      self.id.to_s.reverse
+    end
 
-  def aws_resource_name
-    "#{self.aws_id}.jpg"
-  end
+    def aws_resource_name
+      "#{self.aws_id}.jpg"
+    end
+
+    def delete_pets_without_images
+      if pet.images.count.zero?
+        pet.destroy
+      end
+    end
 
 end

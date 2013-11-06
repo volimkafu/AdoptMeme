@@ -1,7 +1,7 @@
 class Pet < ActiveRecord::Base
   validates :name, :petfinder_id, :shelter_id, :presence => true
 
-  has_many :images
+  has_many :images, :dependent => :destroy
   has_many :captioned_images, :through => :images, :source => :captions
 
   @@petfinder_api_key = ENV["PETFINDER_API_KEY"]
