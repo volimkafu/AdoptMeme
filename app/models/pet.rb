@@ -26,8 +26,8 @@ class Pet < ActiveRecord::Base
         :output => :full,
         :animal => :cat,
         :status => :A, # A = Adoptable
-        :location => 94103,
-        :count => 50  # number of records to return
+        :location => 94103
+        # :count => 50  # number of records to return
       }
     ).to_s
 
@@ -50,6 +50,7 @@ class Pet < ActiveRecord::Base
         if photo["@size"] == "x"
           image = Image.new
           image.petfinder_url = photo["$t"]
+          image.save
           pet.images << image
         end
       end
