@@ -22,10 +22,20 @@ class Image < ActiveRecord::Base
 
   def push_image_to_aws
     image = RestClient.get(self.petfinder_url)
-    resource_name = "#{self.id}.jpg"
+    resource_name = self.aws_resource_name
     create_aws_object(resource_name, image)
-    self.amazon_aws_url = "http://adoptmeme.s3.amazonaws.com/" + resource_name
+    self.amazon_aws_url = "http://s3.amazonaws.com/adoptmeme/" + resource_name
     self.save
+  end
+
+  def aws_id
+    # Sequential ids are disfavored on S3 for performance reasons.
+    # So we reverse the id.
+    self.id.to_s.reverse
+  end
+
+  def aws_resource_name
+    "#{self.aws_id}.jpg"
   end
 
 end
