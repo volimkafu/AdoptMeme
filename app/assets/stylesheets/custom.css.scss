@@ -5,3 +5,16 @@ body {
   font-family: $font-stack;
   color: $primary-color;
 }
+
+a {
+  text-decoration: none;
+}
+
+.cat-tile {
+  height: 200px;
+  width: 250px;
+  margin: 2.5px;
+  border-radius: 5px;
+  display: inline-block;
+  background-size: cover;
+}
