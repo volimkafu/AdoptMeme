@@ -9,10 +9,10 @@ class Image < ActiveRecord::Base
   def create_aws_object(name, content)
     # Creating objects: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/S3Object.html
     s3 = AWS::S3.new
-    bucket = s3.bucket[:adoptmeme]
+    bucket = s3.buckets[:adoptmeme]
     bucket.objects[name].write(content)
   end
-  handle_asynchronously :create_aws_object
+  # handle_asynchronously :create_aws_object
 
   def push_image_to_aws
     image = RestClient.get(self.petfinder_url)
