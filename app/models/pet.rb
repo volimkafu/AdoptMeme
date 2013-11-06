@@ -15,7 +15,7 @@ class Pet < ActiveRecord::Base
     @@petfinder_secret_key
   end
 
-  def fetchRandom
+  def self.fetch_random
     petfinder_url = Addressable::URI.new(
       scheme: "http",
       host: "api.petfinder.com",
@@ -27,7 +27,7 @@ class Pet < ActiveRecord::Base
         :animal => :cat,
         :status => :A, # A = Adoptable
         :location => 94103,
-        :count => 100  # number of records to return
+        :count => 20  # number of records to return
       }
     ).to_s
 
@@ -36,7 +36,7 @@ class Pet < ActiveRecord::Base
   end
 
   def self.parse_pets(payload)
-    payload["petfinder"]["pet"].each do |pet_record|
+    payload["petfinder"]["pets"]["pet"].each do |pet_record|
       pet = Pet.new
       pet.name = pet_record["name"]["$t"]
       pet.sex = pet_record["sex"]["$t"]
@@ -49,8 +49,9 @@ class Pet < ActiveRecord::Base
       # Also store references to full-resolution pet photos
       pet_record["media"]["photos"]["photo"].each do |photo|
         if photo["@size"] == "x"
-          petfinder_image_path = photo["$t"]
-          pet.images << Image.create(petfinder_url: petfinder_image_path)
+          image = Image.new
+          image.petfinder_url = photo["$t"]
+          pet.images << image
         end
       end
 
