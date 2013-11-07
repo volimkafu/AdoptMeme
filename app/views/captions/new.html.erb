@@ -1,6 +1,6 @@
 <script type="text/javascript">
   var PET_IMAGE_INFO = {
-    amazonAWSUrl: <%= @pet.images.first.amazon_aws_url %>,
+    amazonAWSUrl: "<%= @pet.images.first.amazon_aws_url %>",
     petId: <%= @pet.id %>,
     imageId: <%= @pet.images.first.id  %>
   }
@@ -11,11 +11,11 @@
 
   <form action="post">
     <input type="hidden" name="caption[image_id]">
-    <input type="text" name="caption[top_text]" placeholder="Top text">
+    <input type="text" name="caption[top_text]" placeholder="Top text" id="toptext">
   <br>
     <canvas id="catCanvas"></canvas>
   <br>
-    <input type="text" name="caption[bottom_text]" placeholder="Bottom text">
+    <input type="text" name="caption[bottom_text]" placeholder="Bottom text" id="bottomtext">
   <input type="submit">
   </form>
 
