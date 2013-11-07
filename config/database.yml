@@ -9,11 +9,3 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
-
-production:
-  adapter: postgresql
-  database: adopt_meme_production
-  username: adopt_meme
-  password: password1
-  pool: 5
-  timeout: 5000
