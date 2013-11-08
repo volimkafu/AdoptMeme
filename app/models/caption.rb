@@ -3,6 +3,7 @@ class Caption < ActiveRecord::Base
   validate :top_and_bottom_captions_not_both_blank
 
   belongs_to :image
+  has_many :captioned_images, :inverse_of :caption
 
   belongs_to(
     :captioner,

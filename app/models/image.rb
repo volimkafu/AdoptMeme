@@ -6,6 +6,7 @@ class Image < ActiveRecord::Base
 
   belongs_to :pet
   has_many :captions, :inverse_of => :image
+  has_many :captioned_images, :through => :caption, :source => :captioned_images
 
   def create_aws_object(name, content)
     # Creating objects: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/S3Object.html
