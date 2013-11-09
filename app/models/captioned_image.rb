@@ -1,4 +1,5 @@
 class CaptionedImage < ActiveRecord::Base
-  # attr_accessible :title, :body
+  include AdoptMemeAwsHelper
   belongs_to :caption
+  validates :caption_id, :presence => true
 end
