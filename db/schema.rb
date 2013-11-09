@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108233412) do
-
-  create_table "captioned_images", :force => true do |t|
-    t.integer  "caption_id"
-    t.string   "aws_url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20131109012703) do
 
   create_table "captions", :force => true do |t|
     t.string   "top_text"
