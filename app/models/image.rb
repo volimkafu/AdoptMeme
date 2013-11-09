@@ -1,4 +1,4 @@
-require 'AdoptMemeAwsHelper'
+require 'adopt_meme_aws_helper'
 
 class Image < ActiveRecord::Base
   include AdoptMemeAwsHelper

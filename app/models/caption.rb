@@ -1,5 +1,5 @@
 require 'rmagick'
-require 'AdoptMemeAwsHelper'
+require 'adopt_meme_aws_helper'
 
 class Caption < ActiveRecord::Base
   include AdoptMemeAwsHelper
@@ -7,14 +7,10 @@ class Caption < ActiveRecord::Base
 
   validates :captioner, :image, :presence => true
   belongs_to :image
-  belongs_to :captioner
 
-  belongs_to(
-    :captioner,
-    :foreign_key => :captioner_id,
-    :primary_key => :id,
-    :class_name => "User"
-  )
+  belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
+
+  MIN_POINTSIZE = 20
 
   def source
     @image_src ||= RestClient.get(self.image.amazon_aws_url)
@@ -22,19 +18,20 @@ class Caption < ActiveRecord::Base
   end
 
   def fontsize(message)
-    self.source.columns / message.length - 5
+    base_size = self.source.columns / message.length - 5
+    return base_size if base_size > MIN_POINTSIZE
+    MIN_POINTSIZE
   end
 
   def draw_top_text(message)
-    Draw.new.annotate(@source,0,0,0,10, message) {
+    Draw.new.annotate(@source, 0, 0, 0, 10, message) {
         self.font_family = 'Impact'
         self.fill = 'white'
         self.stroke = 'black'
         self.stroke_width = 3
-        #self.pointsize = 32
-        self.pointsize = fontsize(source, message)
-        self.font_weight = Magick::BoldWeight
-        self.gravity = Magick::NorthGravity
+        self.pointsize = fontsize(message)
+        self.font_weight = BoldWeight
+        self.gravity = NorthGravity
     }
   end
 
