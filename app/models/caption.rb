@@ -1,4 +1,5 @@
 require 'rmagick'
+require 'AdoptMemeAwsHelper'
 
 class Caption < ActiveRecord::Base
   include AdoptMemeAwsHelper
