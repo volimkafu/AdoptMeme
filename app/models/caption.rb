@@ -7,14 +7,13 @@ class Caption < ActiveRecord::Base
 
   validates :captioner, :image, :presence => true
   belongs_to :image
-
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
 
   MIN_POINTSIZE = 20
 
   def source
     @image_src ||= RestClient.get(self.image.amazon_aws_url)
-    @source ||= Image.read(@image_src).first
+    @source ||= Image.from_blob(@image_src).first
   end
 
   def fontsize(message)
