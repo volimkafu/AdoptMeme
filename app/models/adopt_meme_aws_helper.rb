@@ -18,10 +18,6 @@ module AdoptMemeAwsHelper
     self.id.to_s.reverse
   end
 
-  def aws_resource_name
-    "#{self.aws_id}.jpg"
-  end
-
   def create_aws_object(object_name, content)
     bucket.objects[object_name].write(content)
   end
