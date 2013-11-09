@@ -1,6 +1,5 @@
 class Caption < ActiveRecord::Base
   validates :captioner, :image, :presence => true
-  validate :top_and_bottom_captions_not_both_blank
 
   belongs_to :image
   has_many :captioned_images, :inverse_of :caption
@@ -12,10 +11,4 @@ class Caption < ActiveRecord::Base
     :class_name => "User"
   )
 
-  private
-    def top_and_bottom_captions_not_both_blank
-      if top_text.blank? && bottom_text.blank?
-        errors[:top_text] << "Both text fields cannot be blank."
-      end
-    end
 end
