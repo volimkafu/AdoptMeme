@@ -5,14 +5,14 @@ class Image < ActiveRecord::Base
 
   validates :petfinder_url, :presence => true
 
-  after_create :push_image_to_aws
+  after_create :push_petfinder_image_to_aws
   # after_destroy :delete_pets_without_images
 
   belongs_to :pet
   has_many :captions, :inverse_of => :image
   has_many :captioned_images, :through => :caption, :source => :captioned_images
 
-  def push_image_to_aws
+  def push_petfinder_image_to_aws
     resource_name = self.aws_resource_name
     self.amazon_aws_url = "http://s3.amazonaws.com/adoptmeme/" + resource_name
     self.save
