@@ -42,4 +42,8 @@ module AdoptMemeAwsHelper
   def get_aws_object(name)
     bucket.objects[object_name].read
   end
+
+  def empty_bucket
+    bucket.objects.delete_all
+  end
 end
