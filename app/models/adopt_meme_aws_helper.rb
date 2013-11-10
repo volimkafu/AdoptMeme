@@ -39,7 +39,7 @@ module AdoptMemeAwsHelper
     self.save
   end
 
-  def get_aws_object(name)
+  def get_aws_object(object_name)
     bucket.objects[object_name].read
   end
 
