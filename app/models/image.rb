@@ -17,14 +17,10 @@ class Image < ActiveRecord::Base
   end
 
   def push_petfinder_image_to_aws
-    resource_name = self.aws_resource_name
-    self.amazon_aws_url = "http://s3.amazonaws.com/adoptmeme/" + resource_name
-    self.save
-
     begin
       sleep 0.25 # slow down requests to petfinder.
       image = RestClient.get(self.petfinder_url)
-      create_aws_object(resource_name, image)
+      create_aws_object(self.aws_resource_name, image)
     rescue
       puts "There was a problem with Image #{self.id}"
       self.delete
