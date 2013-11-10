@@ -1,5 +1,6 @@
 class Pet < ActiveRecord::Base
   validates :name, :petfinder_id, :shelter_id, :presence => true
+  validates :petfinder_id, :uniqueness => true
 
   has_many :images, :dependent => :destroy
   has_many :captioned_images, :through => :images, :source => :captions
@@ -43,19 +44,16 @@ class Pet < ActiveRecord::Base
       pet.petfinder_id = pet_record["id"]["$t"]
       pet.shelter_id = pet_record["shelterId"]["$t"]
       pet.description = pet_record["description"]["$t"]
-      pet.save!
 
       # Also store references to full-resolution pet photos
       pet_record["media"]["photos"]["photo"].each do |photo|
         if photo["@size"] == "x"
-          image = Image.new
+          image = pet.images.new
           image.petfinder_url = photo["$t"]
-          image.save
-          pet.images << image
         end
       end
 
-      pet.delete if pet.images.empty?
+      pet.save unless pet.images.empty?
     end
   end
 end
