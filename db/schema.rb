@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110031350) do
+ActiveRecord::Schema.define(:version => 20131110103803) do
 
   create_table "captions", :force => true do |t|
     t.string   "top_text"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20131110031350) do
     t.integer  "image_id"
     t.string   "top_text_align",    :default => "center"
     t.string   "bottom_text_align", :default => "center"
+    t.string   "amazon_aws_url"
   end
 
   create_table "delayed_jobs", :force => true do |t|
