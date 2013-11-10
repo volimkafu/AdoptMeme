@@ -1,0 +1,7 @@
+<h1>Images Index Page</h1>
+
+<% @images.each do |image| %>
+  <a href='<%= "#{image.id}/new" %>'>
+    <div class="cat-tile" style="background-image: url(<%= image.amazon_aws_url %>);"></div>
+  </a>
+<% end %>
