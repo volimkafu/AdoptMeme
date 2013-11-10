@@ -5,7 +5,7 @@ class CaptionsController < ApplicationController
   end
 
   def new
-    @pet = Pet.find(params[:petid])
+    @image = Image.find(params[:imageid])
     render :new
   end
 
@@ -14,6 +14,11 @@ class CaptionsController < ApplicationController
     @caption.captioner_id = self.current_user.id
     @caption.save
     redirect_to '/'
+  end
+
+  def show
+    @caption = Caption.find(params[:captionid])
+    render :show
   end
 
   private

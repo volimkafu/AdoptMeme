@@ -1,13 +1,12 @@
 <script type="text/javascript">
   var PET_IMAGE_INFO = {
-    amazonAWSUrl: "<%= @pet.images.first.amazon_aws_url %>",
-    petId: <%= @pet.id %>,
-    imageId: <%= @pet.images.first.id  %>
+    amazonAWSUrl: "<%= @image.amazon_aws_url %>",
+    imageId: <%= @image.id  %>
   }
 </script>
 
 <div class="container">
-  <h1> <%= @pet.name %> </h1>
+  <h1> <%= @image.pet.name %> </h1>
 
   <form action="post">
     <input type="hidden" name="caption[image_id]">
