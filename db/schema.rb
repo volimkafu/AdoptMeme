@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109012703) do
+ActiveRecord::Schema.define(:version => 20131110031350) do
 
   create_table "captions", :force => true do |t|
     t.string   "top_text"
     t.string   "bottom_text"
     t.integer  "captioner_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "image_id"
+    t.string   "text_align",   :default => "center"
   end
 
   create_table "delayed_jobs", :force => true do |t|
