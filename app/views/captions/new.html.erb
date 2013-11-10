@@ -8,8 +8,14 @@
 <div class="container">
   <h1> <%= @image.pet.name %> </h1>
 
-  <form action="post">
-    <input type="hidden" name="caption[image_id]">
+  <form method="post" action="<%= captions_url %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" >
+
+    <input type="hidden" name="caption[image_id]" value="<%= @image.id%>">
+    <input type="hidden" name="caption[captioner_id]" value="1">
+    <input type="hidden" name="caption[top_text_align]" value="center">
+    <input type="hidden" name="caption[bottom_text_align]" value="center">
+
     <input type="text" name="caption[top_text]" placeholder="Top text" id="toptext">
   <br>
     <canvas id="catCanvas"></canvas>
