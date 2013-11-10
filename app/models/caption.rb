@@ -9,6 +9,7 @@ class Caption < ActiveRecord::Base
   MEME_FONT = '/Library/Fonts/Impact.ttf'
 
   validates :captioner, :image, :presence => true
+  validates :text_align, :inclusion => ["center", "left", "right"]
   belongs_to :image
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
   after_save :create_captioned_image
@@ -59,14 +60,26 @@ class Caption < ActiveRecord::Base
       d = Draw.new
       set_meme_annotation_settings(d)
       d.pointsize = fontsize(self.top_text)
-      d.gravity = NorthGravity
+
+      case self.text_align
+      when "center" then d.gravity = NorthGravity
+      when "left" then d.gravity = NorthWestGravity
+      when "right" then d.gravity = NorthEastGravity
+      end
+
       d.annotate(self.source, 0, 0, 0, 0, self.top_text)
     end
 
     def draw_bottom_text
       d = Draw.new
       set_meme_annotation_settings(d)
-      d.gravity = SouthGravity
+
+      case self.text_align
+      when "center" then d.gravity = SouthGravity
+      when "left" then d.gravity = SouthWestGravity
+      when "right" then d.gravity = SouthEastGravity
+      end
+
       d.pointsize = fontsize(self.bottom_text)
       d.annotate(source, 0, 0, 0, 20, self.bottom_text)
     end
