@@ -9,11 +9,11 @@ class Caption < ActiveRecord::Base
   MEME_FONT = '/Library/Fonts/Impact.ttf'
 
   validates :captioner, :image, :presence => true
-  validates :text_align, :inclusion => ["center", "left", "right"]
+  validates :top_text_align, :bottom_text_align, :inclusion => ["center", "left", "right"]
+
   belongs_to :image
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
   after_save :create_captioned_image
-
 
   def aws_resource_name
     "caption/#{self.aws_id}.jpg"
@@ -61,7 +61,7 @@ class Caption < ActiveRecord::Base
       set_meme_annotation_settings(d)
       d.pointsize = fontsize(self.top_text)
 
-      case self.text_align
+      case self.top_text_align
       when "center" then d.gravity = NorthGravity
       when "left" then d.gravity = NorthWestGravity
       when "right" then d.gravity = NorthEastGravity
@@ -74,7 +74,7 @@ class Caption < ActiveRecord::Base
       d = Draw.new
       set_meme_annotation_settings(d)
 
-      case self.text_align
+      case self.bottom_text_align
       when "center" then d.gravity = SouthGravity
       when "left" then d.gravity = SouthWestGravity
       when "right" then d.gravity = SouthEastGravity

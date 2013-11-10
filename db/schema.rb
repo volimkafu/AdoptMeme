@@ -17,10 +17,11 @@ ActiveRecord::Schema.define(:version => 20131110031350) do
     t.string   "top_text"
     t.string   "bottom_text"
     t.integer  "captioner_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "image_id"
-    t.string   "text_align",   :default => "center"
+    t.string   "top_text_align",    :default => "center"
+    t.string   "bottom_text_align", :default => "center"
   end
 
   create_table "delayed_jobs", :force => true do |t|
