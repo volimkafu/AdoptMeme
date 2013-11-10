@@ -5,7 +5,7 @@ class Caption < ActiveRecord::Base
   attr_accessible :bottom_text,
                   :bottom_text_align,
                   :top_text,
-                  :top_text_align
+                  :top_text_align,
                   :image_id,
                   :image
 
