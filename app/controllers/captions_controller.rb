@@ -13,7 +13,7 @@ class CaptionsController < ApplicationController
     @caption = Caption.new(caption_params)
     @caption.captioner_id = self.current_user.id
     @caption.save
-    redirect_to '/'
+    redirect_to '/#{@caption.id}'
   end
 
   def show
