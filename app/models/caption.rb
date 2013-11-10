@@ -43,10 +43,14 @@ class Caption < ActiveRecord::Base
     def fontsize(msg)
       d = Draw.new
       pointsize = d.pointsize = 0
-      until d.get_multiline_type_metrics(msg).width > self.source.columns
+      allowable_width = self.source.columns
+      allowable_height = self.source.rows * 0.3
+      until ((d.get_multiline_type_metrics(msg).width > allowable_width) ||
+        (d.get_multiline_type_metrics(msg).height > allowable_height))
         pointsize += 10
         d.pointsize = pointsize
       end
+
       pointsize
     end
 
