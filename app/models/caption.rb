@@ -7,7 +7,8 @@ class Caption < ActiveRecord::Base
                   :top_text,
                   :top_text_align,
                   :image_id,
-                  :image
+                  :image,
+                  :captioner_id
 
   include AdoptMemeAwsHelper
   include Magick
@@ -26,12 +27,12 @@ class Caption < ActiveRecord::Base
     "caption/#{self.aws_id}.jpg"
   end
 
-  private
+  protected
     def create_captioned_image
       draw_top_text unless self.top_text.blank?
       draw_bottom_text unless self.bottom_text.blank?
       draw_watermark
-      create_aws_object(aws_resource_name, source)
+      create_aws_object(aws_resource_name, source.to_blob)
     end
 
     def source
