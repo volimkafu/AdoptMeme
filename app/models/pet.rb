@@ -39,7 +39,7 @@ class Pet < ActiveRecord::Base
   def self.parse_pets(payload)
     payload["petfinder"]["pets"]["pet"].each do |pet_record|
       pet = Pet.new
-      pet.name = pet_record["name"]["$t"]
+      pet.name = pet_record["name"]["$t"].split("_").first
       pet.sex = pet_record["sex"]["$t"]
       pet.petfinder_id = pet_record["id"]["$t"]
       pet.shelter_id = pet_record["shelterId"]["$t"]

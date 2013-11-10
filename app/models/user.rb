@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  attr_accessible :username, :password, :email
 
   validates :email, :presence => true, :uniqueness => true
 

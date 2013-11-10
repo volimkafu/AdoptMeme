@@ -2,13 +2,20 @@ require 'rmagick'
 require 'adopt_meme_aws_helper'
 
 class Caption < ActiveRecord::Base
+  attr_accessible :bottom_text,
+                  :bottom_text_align,
+                  :top_text,
+                  :top_text_align
+                  :image_id,
+                  :image
+
   include AdoptMemeAwsHelper
   include Magick
 
   WATERMARK_FONT = '/Library/Fonts/Helvetica.ttf'
   MEME_FONT = '/Library/Fonts/Impact.ttf'
 
-  validates :captioner, :image, :presence => true
+  validates :image_id, :presence => true
   validates :top_text_align, :bottom_text_align, :inclusion => ["center", "left", "right"]
 
   belongs_to :image

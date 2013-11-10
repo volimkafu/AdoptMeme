@@ -10,7 +10,7 @@ class CaptionsController < ApplicationController
   end
 
   def create
-    @caption = Caption.new(caption_params)
+    @caption = Caption.new(params[:caption])
     @caption.captioner_id = self.current_user.id
     @caption.save
     redirect_to '/#{@caption.id}'
@@ -21,8 +21,4 @@ class CaptionsController < ApplicationController
     render :show
   end
 
-  private
-    def caption_params
-      params.require(:caption).permit(:top_text, :bottom_text, :image_id)
-    end
 end
