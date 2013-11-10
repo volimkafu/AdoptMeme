@@ -21,7 +21,7 @@ class Caption < ActiveRecord::Base
 
   belongs_to :image
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
-  after_save :create_captioned_image
+  after_create :create_captioned_image
 
   def aws_resource_name
     "caption/#{self.aws_id}.jpg"
@@ -44,7 +44,7 @@ class Caption < ActiveRecord::Base
       d = Draw.new
       pointsize = d.pointsize = 0
       allowable_width = self.source.columns
-      allowable_height = self.source.rows * 0.3
+      allowable_height = self.source.rows * 0.25
       until ((d.get_multiline_type_metrics(msg).width > allowable_width) ||
         (d.get_multiline_type_metrics(msg).height > allowable_height))
         pointsize += 10
@@ -55,7 +55,7 @@ class Caption < ActiveRecord::Base
     end
 
     def chars_per_line
-      @max_chars ||= Math.floor(self.source.columns / 30)
+      @max_chars ||= self.source.columns / 20
     end
 
     def purpleize
@@ -78,7 +78,8 @@ class Caption < ActiveRecord::Base
     def draw_top_text
       d = Draw.new
       set_meme_annotation_settings(d)
-      d.pointsize = fontsize(self.top_text)
+      formatted_text = insert_newlines(self.top_text)
+      d.pointsize = fontsize(formatted_text)
 
       case self.top_text_align
       when "center" then d.gravity = NorthGravity
@@ -86,12 +87,14 @@ class Caption < ActiveRecord::Base
       when "right" then d.gravity = NorthEastGravity
       end
 
-      d.annotate(self.source, 0, 0, 0, 0, self.top_text)
+      d.annotate(self.source, 0, 0, 0, 0, formatted_text)
     end
 
     def draw_bottom_text
       d = Draw.new
       set_meme_annotation_settings(d)
+      formatted_text = insert_newlines(self.bottom_text)
+      d.pointsize = fontsize(formatted_text)
 
       case self.bottom_text_align
       when "center" then d.gravity = SouthGravity
@@ -99,8 +102,7 @@ class Caption < ActiveRecord::Base
       when "right" then d.gravity = SouthEastGravity
       end
 
-      d.pointsize = fontsize(self.bottom_text)
-      d.annotate(source, 0, 0, 0, 20, self.bottom_text)
+      d.annotate(source, 0, 0, 0, 20, formatted_text)
     end
 
     def draw_watermark
