@@ -18,16 +18,25 @@ module AdoptMemeAwsHelper
     self.id.to_s.reverse
   end
 
+  def set_amazon_aws_url
+    self.amazon_aws_url = "http://s3.amazonaws.com/adoptmeme/" + aws_resource_name
+    self.save
+  end
+
   def create_aws_object(object_name, content)
     bucket.objects[object_name].write(content)
+    set_amazon_aws_url
   end
 
   def update_aws_object(object_name, content)
     create_aws_object(object_name, content)
+    set_amazon_aws_url
   end
 
   def delete_aws_object(object_name)
     bucket.objects[object_name].delete
+    self.amazon_aws_url = ""
+    self.save
   end
 
   def get_aws_object(name)
