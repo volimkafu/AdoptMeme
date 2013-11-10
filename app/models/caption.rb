@@ -20,6 +20,13 @@ class Caption < ActiveRecord::Base
   end
 
   private
+    def create_captioned_image
+      draw_top_text unless self.top_text.blank?
+      draw_bottom_text unless self.bottom_text.blank?
+      draw_watermark
+      create_aws_object(aws_resource_name, source)
+    end
+
     def source
       @image_src ||= get_aws_object(self.image.aws_resource_name)
       @source ||= Image.from_blob(@image_src).first
@@ -114,10 +121,4 @@ class Caption < ActiveRecord::Base
       lines.join('\n')
     end
 
-    def create_captioned_image
-      draw_top_text unless self.top_text.blank?
-      draw_bottom_text unless self.bottom_text.blank?
-      draw_watermark
-      create_aws_object(aws_resource_name, source)
-    end
 end
