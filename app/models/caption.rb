@@ -11,8 +11,12 @@ class Caption < ActiveRecord::Base
 
   MIN_POINTSIZE = 20
 
+  def aws_resource_name
+    "caption/#{self.aws_id}.jpg"
+  end
+
   def source
-    @image_src ||= RestClient.get(self.image.amazon_aws_url)
+    @image_src ||= get_aws_object(self.image.aws_resource_name)
     @source ||= Image.from_blob(@image_src).first
   end
 
