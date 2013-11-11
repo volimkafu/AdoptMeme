@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'addressable', :require => "addressable/uri"
 gem 'aws-sdk', '~> 1.0'
+gem 'backbone-on-rails'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'delayed_job_active_record'
 gem 'figaro'
