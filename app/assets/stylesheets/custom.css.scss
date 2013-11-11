@@ -6,6 +6,7 @@ $dark-text-color: #333;
 $light-background: #A5FFFA;
 $dark-background: #00B3AB;
 $icon-color: #1F6663;
+$hyperlink-color: #A9E6DB;
 $dark-color2: #006662;
 $highlight: #EAFFFA;
 $cat-tile-outline: #B8FFDD;
@@ -29,14 +30,14 @@ h1 {
   min-height: 100vh;
   padding-top: 30px;
   padding-bottom: 30px;
-  overflow: hidden;
   width: 50%;
   magin: 0px auto;
   input {
     text-transform: uppercase;
   }
   .canvas-container {
-    display: block;
+    display: inline-block;
+    position: relative;
     margin: 0 auto;
     padding: 0;
   }
@@ -135,7 +136,7 @@ button:focus {
 
 a {
   text-decoration: none;
-  color: red;
+  color: $hyperlink-color;
 }
 
 .cat-tile-container {
