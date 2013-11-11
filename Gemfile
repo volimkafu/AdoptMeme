@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'addressable'
+gem 'addressable', :require => "addressable/uri"
 gem 'aws-sdk', '~> 1.0'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'delayed_job_active_record'
