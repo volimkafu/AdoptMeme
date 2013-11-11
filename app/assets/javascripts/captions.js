@@ -28,8 +28,6 @@ $(document).ready( function () {
     context.fillStyle = "white";
     context.strokeStyle = "black";
 
-    // drawText(topText, center_x, top_y)
-    // drawText(bottomText, center_x, bottom_y)
     drawTopText(topText, center_x, 65)
 
     context.lineWidth = 2.5;

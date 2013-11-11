@@ -10,8 +10,7 @@ class CaptionsController < ApplicationController
   end
 
   def create
-    @caption = Caption.new(params[:caption])
-    # @caption.captioner_id = self.current_user.id
+    @caption = Caption.create(params[:caption])
     @caption.save
     redirect_to "/#{@caption.id}"
   end
