@@ -10,7 +10,6 @@ class Image < ActiveRecord::Base
 
   belongs_to :pet
   has_many :captions, :inverse_of => :image
-  has_many :captioned_images, :through => :caption, :source => :captioned_images
 
   def aws_resource_name
     "#{self.aws_id}.jpg"
