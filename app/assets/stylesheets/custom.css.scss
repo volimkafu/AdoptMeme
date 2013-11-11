@@ -24,7 +24,6 @@ h1 {
   padding: 10px 0 10px 0;
 }
 
-
 .editor-container {
   margin: 0 auto;
   min-height: 100vh;
@@ -36,13 +35,39 @@ h1 {
   input {
     text-transform: uppercase;
   }
-  catCanvas {
+  .canvas-container {
     display: block;
     margin: 0 auto;
     padding: 0;
   }
 
-  a.btn {
+  .btn-group {
+    display: inline-block;
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 30px;
+    width: 30%;
+    border: 1px solid $dark-color2;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    a {
+      box-sizing: border-box;
+      display: inline-block;
+      text-align: center;
+      padding: 10px;
+      width: 33%;
+      color: $dark-color2;
+      background-color: $highlight;
+    }
+
+    a.selected {
+      color: $highlight;
+      background-color: $dark-color2;
+    }
+  }
+
+  a.btn.submit {
     display: block;
     width: 200px;
     text-align: center;
@@ -56,22 +81,20 @@ h1 {
     text-transform: uppercase;
   }
 
-  a.btn:active {
+  a.submit:active {
       position: relative;
       background-color: red;
       top: 2px;
-    }
+  }
+
 }
 
-
-
 input[type=text] {
+  display: inline-block;
   font-family: $header-font-stack;
   box-sizing: border-box;
   padding: 5px;
-  margin-top: 15px;
   margin-bottom: 5px;
-  display: block;
   border: none;
   font-size: 30px;
   width: 100%;
