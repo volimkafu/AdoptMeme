@@ -17,6 +17,7 @@ $(document).ready( function () {
 
   function render() {
     context.drawImage(background,0,0);
+    context.lineJoin = 'bevel';
     var topText = $('#toptext').val().toUpperCase();
     var bottomText = $('#bottomtext').val().toUpperCase();;
 
