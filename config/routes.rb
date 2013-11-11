@@ -1,6 +1,7 @@
 AdoptMeme::Application.routes.draw do
   resources :users, :only => [:index, :new, :create]
   resource :session, :only => [:new, :create, :destroy]
+  resources :images, :only => [:index]
   root :to => "static_pages#root"
   resources :captions, :only => [:create, :index]
   get '/:captionid', to: "captions#show"

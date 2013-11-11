@@ -1,0 +1,1 @@
+AdoptMeme.Models.petImage = Backbone.Model.extend({})

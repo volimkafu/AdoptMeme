@@ -4,7 +4,11 @@ window.AdoptMeme = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    this.petImages = new AdoptMeme.Collections.petImages();
+    AdoptMeme.Routers.router = new AdoptMeme.Routers.applicationRouter({
+      "$rootEl": $('.container')
+    });
+    Backbone.history.start();
   }
 };
 
