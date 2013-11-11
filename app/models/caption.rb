@@ -1,4 +1,3 @@
-require 'rmagick'
 require 'adopt_meme_aws_helper'
 
 class Caption < ActiveRecord::Base

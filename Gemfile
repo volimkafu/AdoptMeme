@@ -8,7 +8,7 @@ gem 'figaro'
 gem 'jquery-rails'
 gem 'rails', '3.2.12'
 gem 'rest-client'
-gem 'rmagick', '2.13.2'
+gem 'rmagick', '2.13.2', :require => 'RMagick'
 
 group :development do
   gem 'awesome_print'
