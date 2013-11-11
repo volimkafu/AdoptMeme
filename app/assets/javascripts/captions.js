@@ -10,6 +10,8 @@ $(document).ready( function () {
   background.onload = function(){
       canvas.width = this.width;
       canvas.height = this.height;
+      $('.canvas-container').css('width', this.width)
+      $('.editor-container').css('width', this.width)
       context.drawImage(background,0,0);
     }
 
