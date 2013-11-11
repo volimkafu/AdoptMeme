@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110103803) do
+ActiveRecord::Schema.define(:version => 20131111213541) do
 
   create_table "captions", :force => true do |t|
     t.string   "top_text"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20131110103803) do
     t.string   "name"
     t.string   "sex"
     t.integer  "petfinder_id"
-    t.integer  "shelter_id"
+    t.string   "shelter_id"
     t.text     "description"
   end
 
