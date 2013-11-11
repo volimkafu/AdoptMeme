@@ -1,5 +1,35 @@
-<h1> Captions Index </h1>
+<div class="cat-tile-container">
+  <div class="cat-tile-column">
+  <% @captions.shuffle.each do |caption| %>
+    <a href='<%= "#{caption.image.id}/new" %>'>
+      <div class="cat-tile">
+        <img src="<%= caption.amazon_aws_url %>">
+        <div class="cat-name"><h3><%= caption.image.pet.name %></h3></div>
+      </div>
+    </a>
+  <% end %>
+  </div>
 
-<% @captions.each do |caption| %>
-  <%= caption %>
-<% end %>
+<div class="cat-tile-column">
+  <% @captions.shuffle.each do |caption| %>
+    <a href='<%= "#{caption.image.id}/new" %>'>
+      <div class="cat-tile">
+        <img src="<%= caption.amazon_aws_url %>">
+        <div class="cat-name"><h3><%= caption.image.pet.name %></h3></div>
+      </div>
+    </a>
+  <% end %>
+  </div>
+
+  <div class="cat-tile-column">
+  <% @captions.shuffle.each do |caption| %>
+    <a href='<%= "#{caption.image.id}/new" %>'>
+      <div class="cat-tile">
+        <img src="<%= caption.amazon_aws_url %>">
+        <div class="cat-name"><h3><%= caption.image.pet.name %></h3></div>
+      </div>
+    </a>
+  <% end %>
+  </div>
+
+</div>

@@ -5,7 +5,7 @@
   }
 </script>
 
-<div class="container">
+<div class="editor-container">
   <h1> <%= @image.pet.name %> </h1>
 
   <form method="post" action="<%= captions_url %>">
@@ -16,12 +16,14 @@
     <input type="hidden" name="caption[top_text_align]" value="center">
     <input type="hidden" name="caption[bottom_text_align]" value="center">
 
-    <input type="text" name="caption[top_text]" placeholder="Top text" id="toptext">
+    <input type="text" name="caption[top_text]" placeholder="Top text" id="toptext" autocomplete="off">
   <br>
     <canvas id="catCanvas"></canvas>
   <br>
-    <input type="text" name="caption[bottom_text]" placeholder="Bottom text" id="bottomtext">
+    <input type="text" name="caption[bottom_text]" placeholder="Bottom text" id="bottomtext" autocomplete="off">
   <input type="submit">
+
+  <a href="#" class="btn">Create meme!</a>
   </form>
 
 </div>

@@ -1,7 +1,35 @@
-<h1>Images Index Page</h1>
+<div class="cat-tile-container">
+  <div class="cat-tile-column">
+  <% @images.shuffle.each do |image| %>
+    <a href='<%= "#{image.id}/new" %>'>
+      <div class="cat-tile">
+        <img src="<%= image.amazon_aws_url %>">
+        <div class="cat-name"><h3><%= image.pet.name %></h3></div>
+      </div>
+    </a>
+  <% end %>
+  </div>
 
-<% @images.each do |image| %>
-  <a href='<%= "#{image.id}/new" %>'>
-    <div class="cat-tile" style="background-image: url(<%= image.amazon_aws_url %>);"></div>
-  </a>
-<% end %>
+<div class="cat-tile-column">
+  <% @images.shuffle.each do |image| %>
+    <a href='<%= "#{image.id}/new" %>'>
+      <div class="cat-tile">
+        <img src="<%= image.amazon_aws_url %>">
+        <div class="cat-name"><h3><%= image.pet.name %></h3></div>
+      </div>
+    </a>
+  <% end %>
+  </div>
+
+  <div class="cat-tile-column">
+  <% @images.shuffle.each do |image| %>
+    <a href='<%= "#{image.id}/new" %>'>
+      <div class="cat-tile">
+        <img src="<%= image.amazon_aws_url %>">
+        <div class="cat-name"><h3><%= image.pet.name %></h3></div>
+      </div>
+    </a>
+  <% end %>
+  </div>
+
+</div>
