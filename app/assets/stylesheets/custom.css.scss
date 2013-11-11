@@ -1,20 +1,168 @@
-$font-stack: Helvetica, sans-serif;
-$primary-color: #333;
+@import url(http://fonts.googleapis.com/css?family=Kelly+Slab|Flamenco:300,400|Open+Sans:400,800|Roboto+Slab|Cherry+Swash);
 
-body {
+$font-stack: Open Sans, Helvetica, sans-serif;
+$header-font-stack: Roboto Slab;
+$dark-text-color: #333;
+$light-background: #A5FFFA;
+$dark-background: #00B3AB;
+$icon-color: #1F6663;
+$dark-color2: #006662;
+$highlight: #EAFFFA;
+$cat-tile-outline: #B8FFDD;
+
+body, html {
   font-family: $font-stack;
-  color: $primary-color;
+  color: $dark-text-color;
+  padding: 0px;
+  height: 100%;
+  background-color: $dark-background;
+}
+
+h1 {
+  font-family: $header-font-stack;
+  font-weight: 800;
+  padding: 10px 0 10px 0;
+}
+
+
+.editor-container {
+  margin: 0 auto;
+  min-height: 100vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  overflow: hidden;
+  width: 50%;
+  magin: 0px auto;
+  input {
+    text-transform: uppercase;
+  }
+  catCanvas {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  a.btn {
+    display: block;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    font-family: $header-font-stack;
+    font-weight: heavy;
+    color: $highlight;
+    background-color: red;
+    font-size: 1em;
+    text-transform: uppercase;
+  }
+
+  a.btn:active {
+      position: relative;
+      background-color: red;
+      top: 2px;
+    }
+}
+
+
+
+input[type=text] {
+  font-family: $header-font-stack;
+  box-sizing: border-box;
+  padding: 5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  display: block;
+  border: none;
+  font-size: 30px;
+  width: 100%;
+  background-color: $light-background;
+  color: $icon-color;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.sidebar {
+  color: $highlight;
+  box-sizing: border-box;
+  width: 25%;
+  max-width: 400px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  padding: 10px;
+  p {
+    font-size: 1.35em;
+    line-height: 125%;
+    padding: 10px;
+  }
+}
+
+.content-container {
+  margin-left: 25%;
+  box-sizing: border-box;
+  border-left: 1px solid $dark-color2;
+  background-color: $highlight;
 }
 
 a {
   text-decoration: none;
+  color: red;
+}
+
+.cat-tile-container {
+  width: 95%;
+  padding-top: 5px;
+  margin: 0px auto;
+  border: 0px solid blue;
+}
+
+.cat-tile-column {
+ margin-left: 1%;
+ margin-right: 1%;
+ width: 30%;
+ border: 0px solid #00DA55;
+ display: inline-block;
+ overflow: hidden;
 }
 
 .cat-tile {
-  height: 200px;
-  width: 250px;
-  margin: 2.5px;
-  border-radius: 5px;
-  display: inline-block;
+  border: 1px solid $cat-tile-outline;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 40px 40px;
   background-size: cover;
+  overflow: hidden;
+  img {
+    width: 100%;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+  }
+  .cat-name {
+    background-color: $dark-background;
+    color: $light-background;
+    padding: 0px;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    h3 {
+      border: none;
+      font-size: 1.25em;
+    }
+  }
+}
+
+h1 {
+  font-size: 3em;
+}
+
+p {
+  font-size: 1.35em;
+  line-spacing: 100%;
+  padding: 10px;
 }
