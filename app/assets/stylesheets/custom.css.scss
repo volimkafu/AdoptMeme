@@ -1,7 +1,7 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800|Roboto+Slab);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800|Roboto+Slab:400,800);
 
 $font-stack: Open Sans, Helvetica, sans-serif;
-$header-font-stack: Roboto Slab;
+$header-font-stack: Roboto Slab, Rockwell, Open Sans, sans-serif;
 $dark-text-color: #333;
 $light-background: #A5FFFA;
 $dark-background: #00B3AB;
@@ -21,7 +21,7 @@ body, html {
 
 h1 {
   font-family: $header-font-stack;
-  font-weight: 800;
+  font-weight: 700;
   padding: 10px 0 10px 0;
 }
 
