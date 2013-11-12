@@ -4,6 +4,7 @@ window.AdoptMeme = {
   Views: {},
   Routers: {},
   initialize: function() {
+    this.pets = new AdoptMeme.Collections.pets();
     this.petImages = new AdoptMeme.Collections.petImages();
     AdoptMeme.Routers.router = new AdoptMeme.Routers.applicationRouter({
       "$rootEl": $('.content-container')
