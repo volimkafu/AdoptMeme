@@ -27,8 +27,8 @@ class Pet < ActiveRecord::Base
         :output => :full,
         :animal => :cat,
         :status => :A, # A = Adoptable
-        :location => 94103
-        # :count => 50  # number of records to return
+        :location => 94103,
+        :count => 50  # number of records to return
       }
     ).to_s
 
@@ -39,7 +39,7 @@ class Pet < ActiveRecord::Base
   def self.parse_pets(payload)
     payload["petfinder"]["pets"]["pet"].each do |pet_record|
       pet = Pet.new
-      pet.name = pet_record["name"]["$t"].split("_").first
+      pet.name = pet_record["name"]["$t"].split("_").first.gsub(/[0-9]/, '')
       pet.sex = pet_record["sex"]["$t"]
       pet.petfinder_id = pet_record["id"]["$t"]
       pet.shelter_id = pet_record["shelterId"]["$t"]
