@@ -3,10 +3,8 @@ AdoptMeme.Models.petImage = Backbone.Model.extend({
 
 	parse: function (data, options) {
 		var pet = new AdoptMeme.Models.pet(data.pet);
-		debugger
 		AdoptMeme.pets.add(pet);
 		delete data.pet;
-		debugger
 		return data;
 	}
 })
