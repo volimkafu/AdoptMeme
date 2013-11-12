@@ -113,6 +113,7 @@ button:focus {
 .sidebar {
   color: $highlight;
   box-sizing: border-box;
+  border-right: 1px solid $dark-color2;
   width: 25%;
   max-width: 400px;
   height: 100%;
@@ -120,6 +121,7 @@ button:focus {
   top: 0px;
   bottom: 0px;
   padding: 10px;
+  position: fixed;
   p {
     font-size: 1.35em;
     line-height: 125%;
@@ -130,7 +132,6 @@ button:focus {
 .content-container {
   margin-left: 25%;
   box-sizing: border-box;
-  border-left: 1px solid $dark-color2;
   background-color: $highlight;
   min-height: 100vh;
 }
@@ -145,21 +146,22 @@ a {
   padding-top: 5px;
   margin: 0px auto;
   border: 0px solid blue;
+  overflow: auto;
 }
 
 .cat-tile-column {
- margin-left: 1%;
- margin-right: 1%;
+ margin-right: 1.5%;
+ margin-left: 1.5%;
+ padding-top: 20px;
  width: 30%;
  border: 0px solid #00DA55;
- display: inline-block;
- overflow: hidden;
+ float: left;
 }
 
 .cat-tile {
   border: 1px solid $cat-tile-outline;
   margin-bottom: 10px;
-  border-radius: 0px 0px 40px 40px;
+  /*border-radius: 0px 0px 10px 10px;*/
   background-size: cover;
   overflow: hidden;
   img {

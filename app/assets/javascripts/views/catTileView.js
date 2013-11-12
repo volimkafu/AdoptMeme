@@ -5,8 +5,7 @@ AdoptMeme.Views.catTileView = Backbone.View.extend({
 
   render: function () {
     var that = this;
-    debugger
-    var renderedContent = this.template({ image: that.model });
+    var renderedContent = this.template({ image: that.model.attributes });
     this.$el.html(renderedContent);
     return this
   }
