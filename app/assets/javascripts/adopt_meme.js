@@ -6,7 +6,7 @@ window.AdoptMeme = {
   initialize: function() {
     this.petImages = new AdoptMeme.Collections.petImages();
     AdoptMeme.Routers.router = new AdoptMeme.Routers.applicationRouter({
-      "$rootEl": $('.container')
+      "$rootEl": $('.content-container')
     });
     Backbone.history.start();
   }

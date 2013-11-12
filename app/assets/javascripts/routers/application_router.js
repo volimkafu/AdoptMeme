@@ -4,22 +4,28 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
     "captions":"captionsIndex"
   },
 
-  $el: ".container",
+  initialize: function (options) {
+    this.$rootEl = options["$rootEl"]
+  },
 
   petsIndex: function () {
     var that = this;
     AdoptMeme.petImages.fetch({
       success: function () {
-        var petsIndexView = new AdoptMeme.Views.petsIndex({
+        var petsIndexView = new AdoptMeme.Views.petsIndexView({
           collection: AdoptMeme.petImages
         });
-        that.$el.html(petsIndexView.render().$el);
-      },
-      error: function () {
-        alert('You suck.')
+        that._swapView(petsIndexView)
+
       }
     })
   },
 
-  captionsIndex: function () {}
+  captionsIndex: function () {},
+
+  _swapView: function (view) {
+    this._currentView && this._currentView.remove();
+    this._currentView = view;
+    this.$rootEl.html(view.render().$el);
+  }
 })
