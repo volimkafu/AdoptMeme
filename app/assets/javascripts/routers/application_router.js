@@ -1,6 +1,7 @@
 AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
   routes: {
     "":"petsIndex",
+    ":imageid/new": 'captionCreate',
     "captions":"captionsIndex"
   },
 
@@ -16,12 +17,33 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
           collection: AdoptMeme.petImages
         });
         that._swapView(petsIndexView)
-
       }
     })
   },
 
-  captionsIndex: function () {},
+  captionCreate: function (image_id) {
+    var that = this;
+    AdoptMeme.petImages.fetch({
+      success: function () {
+        var newCaptionView = new AdoptMeme.Views.newCaptionView({
+          model: AdoptMeme.petImages.get(image_id)
+        });
+        that._swapView(newCaptionView)
+      }
+    })
+  },
+
+  captionsIndex: function () {
+    var that = this;
+    AdoptMeme.petImages.fetch({
+      success: function () {
+        var petCaptionsView = new AdoptMeme.Views.petCaptionsView({
+          collection: AdoptMeme.petImages
+        });
+        that._swapView(petCaptionsView)
+      }
+    })
+  },
 
   _swapView: function (view) {
     this._currentView && this._currentView.remove();
