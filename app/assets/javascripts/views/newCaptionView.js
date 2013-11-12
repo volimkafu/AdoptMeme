@@ -3,6 +3,10 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 
 	template: JST['captions/new'],
 
+	events: {
+		"click a.submit": 'postCaptionCreate'
+	},
+
 	render: function () {
 		var renderedContent = this.template({ 
 			pet: AdoptMeme.pets.get(this.model.attributes.pet_id),
@@ -10,6 +14,11 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 		})
 		this.$el.html(renderedContent)
 		return this
+	},
+
+	postCaptionCreate: function (event) {
+		event.preventDefault();
+		alert('awesome!');
 	},
 
 	animateEditor: function () {	
