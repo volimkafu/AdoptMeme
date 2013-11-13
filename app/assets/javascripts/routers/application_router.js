@@ -48,13 +48,15 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
   },
 
   captionShow: function (captionid) {
-    var that = this;
-    var caption = AdoptMeme.captions.get(captionid) ;
-    var captionShowView = new AdoptMeme.Views.captionShowView({ 
-      collection: AdoptMeme.captions,
-      captionid: captionid
-    })
-    that._swapView(captionShowView)
+    if (!isNaN(parseInt(captionid))) {
+      var that = this;
+      var caption = AdoptMeme.captions.get(captionid);
+      var captionShowView = new AdoptMeme.Views.captionShowView({ 
+        collection: AdoptMeme.captions,
+        captionid: captionid
+      })
+      that._swapView(captionShowView)
+    }
   },
 
   _swapView: function (view) {
