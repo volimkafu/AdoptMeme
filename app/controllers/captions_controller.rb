@@ -1,7 +1,7 @@
 class CaptionsController < ApplicationController
   def index
-    @captions = Caption.all
-    render :index
+    @captions = Caption.limit(20)
+    render :json => @captions
   end
 
   def new
@@ -11,13 +11,20 @@ class CaptionsController < ApplicationController
 
   def create
     @caption = Caption.create(params[:caption])
-    @caption.save
-    redirect_to "/#{@caption.id}"
+    if @caption.save
+      render :json => @caption
+    else
+      render :json => @caption.full_errors, :status => :bad_request
+    end
   end
 
   def show
     @caption = Caption.find(params[:captionid])
-    render :show
+    if !!@caption
+      render :json => @caption
+    else
+      render :json => ["No caption found"], :status => :bad_request
+    end
   end
 
 end
