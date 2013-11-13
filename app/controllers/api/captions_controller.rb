@@ -1,4 +1,4 @@
-class CaptionsController < ApplicationController
+class Api::CaptionsController < ApplicationController
   def index
     @captions = Caption.limit(20)
     render :json => @captions
