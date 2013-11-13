@@ -1,4 +1,4 @@
-AdoptMeme.Views.catTileView = Backbone.View.extend({
+AdoptMeme.Views.petDetailView = Backbone.View.extend({
   className: "cat-tile",
 
   template: JST["pets/cat-tile"],
