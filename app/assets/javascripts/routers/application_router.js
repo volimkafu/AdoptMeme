@@ -49,16 +49,12 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
 
   captionShow: function (captionid) {
     var that = this;
-    var caption = new AdoptMeme.Models.caption({"id": captionid});
-    caption.fetch({
-      success: function () {
-        var captionShowView = new AdoptMeme.Views.captionShowView({
-          model: caption
-        })
-        that._swapView(captionShowView)
-
-      }
+    var caption = AdoptMeme.captions.get(captionid) ;
+    var captionShowView = new AdoptMeme.Views.captionShowView({ 
+      collection: AdoptMeme.captions,
+      captionid: captionid
     })
+    that._swapView(captionShowView)
   },
 
   _swapView: function (view) {

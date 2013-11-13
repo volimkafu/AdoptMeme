@@ -3,9 +3,20 @@ AdoptMeme.Views.captionShowView = Backbone.View.extend({
 
   template: JST['captions/show'],
 
+  initialize: function (options) {
+  	this.captionid = options.captionid;
+  	this.listenTo(this.collection, "change sync", this.render);
+  },
+
   render: function () {
-    var renderedContent = this.template({ caption: this.model })
-    this.$el.html(renderedContent)
-    return this
+  	var caption = this.collection.get(this.captionid)
+  	if (caption) {
+	    var renderedContent = this.template({ caption: caption.attributes })
+	    this.$el.html(renderedContent)
+	    return this
+	} else {
+		this.collection.fetch()
+		return this
+	}
   }
 })
