@@ -10,7 +10,7 @@ AdoptMeme.Views.petsIndexView = Backbone.View.extend({
     var petColumn3 = $("<div class='cat-tile-column'>")
 
     this.collection.each( function (pet, idx) {
-      var petDetail = new AdoptMeme.Views.catTileView({ model: pet })
+      var petDetail = new AdoptMeme.Views.petDetailView({ model: pet })
       petDetail.render()
 
       switch (idx % 3) {

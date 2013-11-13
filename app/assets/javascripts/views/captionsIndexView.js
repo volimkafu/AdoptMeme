@@ -9,19 +9,19 @@ AdoptMeme.Views.captionsIndexView = Backbone.View.extend({
     var petColumn2 = $("<div class='cat-tile-column'>")
     var petColumn3 = $("<div class='cat-tile-column'>")
 
-    this.collection.each( function (pet, idx) {
-      var petDetail = new AdoptMeme.Views.petDetailView({ model: pet })
-      petDetail.render()
+    this.collection.each( function (caption, idx) {
+      var captionDetail = new AdoptMeme.Views.captionDetailView({ model: caption })
+      captionDetail.render()
 
       switch (idx % 3) {
         case 0:
-          petColumn1.append(petDetail.$el)
+          petColumn1.append(captionDetail.$el)
           break;
         case 1:
-          petColumn2.append(petDetail.$el)
+          petColumn2.append(captionDetail.$el)
           break;
         case 2:
-          petColumn3.append(petDetail.$el)
+          petColumn3.append(captionDetail.$el)
           break;
       }
     })
