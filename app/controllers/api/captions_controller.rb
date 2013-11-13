@@ -19,7 +19,7 @@ class Api::CaptionsController < ApplicationController
   end
 
   def show
-    @caption = Caption.find(params[:captionid])
+    @caption = Caption.find(params[:id])
     if !!@caption
       render :json => @caption
     else
