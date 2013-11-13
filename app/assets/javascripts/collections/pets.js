@@ -3,5 +3,5 @@ AdoptMeme.Collections.pets = Backbone.Collection.extend({
 
 	info: "collection pets",
 
-	url: '/pets'
+	url: '/api/pets'
 })

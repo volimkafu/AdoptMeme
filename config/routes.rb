@@ -7,6 +7,6 @@ AdoptMeme::Application.routes.draw do
     resources :images, :only => [:index]
   end
 
-  get "/:everythingelse", to: "static_pages#root"
+  get "/:captionid", to: "captions#show"
 
 end
