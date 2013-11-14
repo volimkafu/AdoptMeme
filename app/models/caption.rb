@@ -20,10 +20,15 @@ class Caption < ActiveRecord::Base
 
   belongs_to :image
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
-  after_create :create_captioned_image
+  after_create :upcase_text, :create_captioned_image
 
   def aws_resource_name
     "caption/#{self.aws_id}.jpg"
+  end
+
+  def upcase_text
+    self.top_text = self.top_text.upcase
+    self.bottom_text = self.bottom_text.upcase
   end
 
   protected
@@ -42,8 +47,8 @@ class Caption < ActiveRecord::Base
     def fontsize(msg)
       d = Draw.new
       pointsize = d.pointsize = 0
-      allowable_width = self.source.columns
-      allowable_height = self.source.rows * 0.25
+      allowable_width = self.source.columns*0.90
+      allowable_height = self.source.rows * 0.30
       until ((d.get_multiline_type_metrics(msg).width > allowable_width) ||
         (d.get_multiline_type_metrics(msg).height > allowable_height))
         pointsize += 10
@@ -54,7 +59,7 @@ class Caption < ActiveRecord::Base
     end
 
     def chars_per_line
-      @max_chars ||= self.source.columns / 20
+      @max_chars ||= self.source.columns / 15
     end
 
     def purpleize
@@ -69,7 +74,7 @@ class Caption < ActiveRecord::Base
       draw.font = MEME_FONT
       draw.fill = 'white'
       draw.stroke = 'black'
-      draw.interline_spacing = -15
+      draw.interline_spacing = -5
       draw.stroke_width = 2
       draw.font_weight = BolderWeight
     end
