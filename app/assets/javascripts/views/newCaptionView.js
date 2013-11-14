@@ -4,7 +4,7 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	template: JST['captions/new'],
 
 	events: {
-		"click a.submit": 'postCaptionCreate'
+		"click .submit": 'postCaptionCreate'
 	},
 
 	render: function () {
@@ -20,10 +20,15 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 		event.preventDefault();
 		var formData = $('form').serializeJSON();
 		var caption = new AdoptMeme.Models.caption(formData.caption);
-		caption.save({}, {success: function () {
-				debugger		
-		}});
-	
+		caption.save({}, {
+			success: function () {
+				AdoptMeme.captions.add(caption);
+				var route = "/"+caption.id.toString()
+				AdoptMeme.Routers.router.navigate(route, {trigger: true})
+			},
+			error: function () {
+				alert('you suck')
+			}});
 	},
 
 	animateEditor: function () {	
