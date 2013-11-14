@@ -34,14 +34,11 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
 
   captionsIndex: function () {
     var that = this;
-    AdoptMeme.captions.fetch({
-      success: function () {
-        var captionsIndex = new AdoptMeme.Views.captionsIndexView({
-          collection: AdoptMeme.captions
-        });
-        that._swapView(captionsIndex)
-      }
-    })
+    AdoptMeme.captions.fetch()
+    var captionsIndex = new AdoptMeme.Views.captionsIndexView({
+      collection: AdoptMeme.captions
+    });
+    that._swapView(captionsIndex)
   },
 
   captionShow: function (captionid) {

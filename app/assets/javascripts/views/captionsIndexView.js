@@ -2,6 +2,10 @@ AdoptMeme.Views.captionsIndexView = Backbone.View.extend({
   $el: $(".content-container"),
 
   template: JST['pets/index'],
+  
+  initialize: function () {
+    this.listenTo(this.collection, "change sync", this.render);
+  },
 
   render: function () {
     var that = this
