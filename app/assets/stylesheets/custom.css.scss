@@ -174,6 +174,7 @@ a {
   margin-bottom: 10px;
   /*border-radius: 0px 0px 10px 10px;*/
   background-size: cover;
+  position: relative;
   overflow: hidden;
   img {
     width: 100%;
@@ -192,6 +193,20 @@ a {
       border: none;
       font-size: 1.25em;
     }
+  }
+
+  .hovercard {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 100;
+    background-color: $dark-color2;
+    display: none;
+    opacity: 0.3;
   }
 }
 
