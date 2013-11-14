@@ -7,6 +7,7 @@ AdoptMeme::Application.routes.draw do
     resources :images, :only => [:index]
   end
 
+  get "/:captionid/new", to: "captions#new"
   get "/:captionid", to: "captions#show"
 
 end
