@@ -3,6 +3,10 @@ AdoptMeme.Views.petsIndexView = Backbone.View.extend({
 
   template: JST['pets/index'],
 
+  initialize: function () {
+    this.listenTo(this.collection, "change sync", this.render);
+  },
+
   render: function () {
     var that = this
     var petColumn1 = $("<div class='cat-tile-column'>")
