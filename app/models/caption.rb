@@ -22,6 +22,8 @@ class Caption < ActiveRecord::Base
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
   after_create :upcase_text, :create_captioned_image
 
+  delegate :pet, :to => :image, :prefix => true
+
   def aws_resource_name
     "caption/#{self.aws_id}.jpg"
   end

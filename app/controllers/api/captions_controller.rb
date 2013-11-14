@@ -1,7 +1,7 @@
 class Api::CaptionsController < ApplicationController
   def index
     @captions = Caption.limit(20)
-    render :json => @captions
+    render :json => @captions, :include => :image_pet
   end
 
   def new
@@ -14,7 +14,8 @@ class Api::CaptionsController < ApplicationController
     if @caption.save
       render :json => @caption
     else
-      render :json => @caption.full_errors, :status => :bad_request
+      puts @caption.errors.full_messages
+      render :json => @caption.errors.full_messages, :status => :bad_request
     end
   end
 
