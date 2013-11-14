@@ -68,26 +68,26 @@ h1 {
     }
   }
 
-  .btn.submit {
-    display: block;
-    width: 200px;
-    text-align: center;
-    padding: 10px;
-    margin: 0 auto;
-    font-family: $header-font-stack;
-    font-weight: heavy;
-    color: $highlight;
-    background-color: red;
-    font-size: 1em;
-    text-transform: uppercase;
-  }
-
  div.submit a.submit:active {
       position: relative;
       background-color: red;
       top: 2px;
   }
 
+}
+
+.btn.submit {
+  display: block;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 auto;
+  font-family: $header-font-stack;
+  font-weight: heavy;
+  color: $highlight;
+  background-color: red;
+  font-size: 1em;
+  text-transform: uppercase;
 }
 
 input[type=text] {
@@ -134,6 +134,17 @@ button:focus {
   box-sizing: border-box;
   background-color: $highlight;
   min-height: 100vh;
+
+  .inner-container {
+    width: 500px;
+    padding-top: 25px;
+    margin: 0 auto;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 a {

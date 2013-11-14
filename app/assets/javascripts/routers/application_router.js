@@ -49,6 +49,7 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
         collection: AdoptMeme.captions,
         captionid: captionid
       })
+      AdoptMeme.captions.fetch()
       that._swapView(captionShowView)
     }
   },
