@@ -3,10 +3,6 @@ AdoptMeme.Views.captionShowView = Backbone.View.extend({
 
   template: JST['captions/show'],
 
-  initialize: function () {
-    this.listenTo(this.collection, "change sync", this.render);
-  },
-
   initialize: function (options) {
   	this.captionid = options.captionid;
   	this.listenTo(this.collection, "change sync", this.render);
@@ -19,6 +15,7 @@ AdoptMeme.Views.captionShowView = Backbone.View.extend({
     if (caption) {
       var renderedContent = $(this.template({ caption: caption.attributes }));
       var pet = AdoptMeme.pets.get({id: caption.attributes.pet_id })
+      pet.set({"image_id": caption.attributes.image_id});
       var petAdoptionInfoView = new AdoptMeme.Views.petAdoptionInfo({model: pet})
       innerContainer.append(renderedContent);
       innerContainer.append(petAdoptionInfoView.render().$el)
