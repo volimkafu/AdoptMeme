@@ -19,10 +19,18 @@ body, html {
   background-color: $dark-background;
 }
 
-h1 {
+h1, h2, h3 {
   font-family: $header-font-stack;
   font-weight: 700;
   padding: 10px 0 10px 0;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 1.5em
 }
 
 .editor-container {
@@ -110,6 +118,7 @@ input[type=text] {
   font-family: $header-font-stack;
   box-sizing: border-box;
   padding: 5px;
+  text-align: center;
   margin-bottom: 5px;
   border: none;
   font-size: 30px;
@@ -238,10 +247,6 @@ a {
       font-size: 2em;
     }
   }
-}
-
-h1 {
-  font-size: 3em;
 }
 
 .center {
