@@ -118,8 +118,8 @@ class Caption < ActiveRecord::Base
         self.font = WATERMARK_FONT
         self.font_weight = BoldWeight
         self.pointsize = 20
-        self.fill = 'green'
-        self.undercolor = 'yellow'
+        self.fill = '#EAFFFA'
+        self.undercolor = '#E64F00'
       }
     end
 

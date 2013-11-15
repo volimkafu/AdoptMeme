@@ -24,6 +24,13 @@ body, html {
   background-color: $dark-background;
 }
 
+.loadmsg {
+  text-align: center;
+  color: $btn-color;
+  font-family: $header-font-stack;
+  font-size: 2.5em;
+}
+
 h1, h2, h3 {
   font-family: $header-font-stack;
   font-weight: 700;
@@ -32,6 +39,7 @@ h1, h2, h3 {
 
 h1 {
   font-size: 3em;
+  text-align: center;
 }
 
 h2 {
@@ -91,10 +99,12 @@ h2 {
 
 .btn.submit {
   display: block;
-  width: 200px;
+  width: 40%;
   text-align: center;
   padding: 10px;
   margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
   font-family: $header-font-stack;
   font-weight: heavy;
   color: $highlight;

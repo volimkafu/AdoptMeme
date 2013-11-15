@@ -17,7 +17,10 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	},
 
 	postCaptionCreate: function (event) {
+		var that = this;
 		event.preventDefault();
+		this.$el.find('.loadmsg').slideToggle('slow')
+		this.$el.find('.submit').slideToggle('fast')
 		var formData = $('form').serializeJSON();
 		var caption = new AdoptMeme.Models.caption(formData.caption);
 		caption.save({}, {
