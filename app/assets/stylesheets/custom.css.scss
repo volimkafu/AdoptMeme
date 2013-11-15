@@ -5,7 +5,7 @@ $header-font-stack: Roboto Slab, Rockwell, Open Sans, sans-serif;
 $dark-text-color: #333;
 $light-background: #A5FFFA;
 $dark-background: #00B3AB;
-$icon-color: #1F6663;
+$icon-color: #002422;
 $hyperlink-color: #A9E6DB;
 $dark-color2: #006662;
 $highlight: #EAFFFA;
@@ -90,6 +90,21 @@ h1 {
   text-transform: uppercase;
 }
 
+.btn.nav {
+  display: block;
+  text-align: center;
+  vertical-align: center;
+  valign: center;
+  padding: 10px;
+  margin: 0 auto;
+  font-family: $header-font-stack;
+  font-weight: heavy;
+  color: $highlight;
+  background-color: $icon-color;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
 input[type=text] {
   display: inline-block;
   font-family: $header-font-stack;
@@ -113,7 +128,6 @@ button:focus {
 .sidebar {
   color: $highlight;
   box-sizing: border-box;
-  border-right: 1px solid $dark-color2;
   width: 25%;
   max-width: 400px;
   height: 100%;
@@ -169,6 +183,15 @@ a {
  float: left;
 }
 
+@mixin hoverable {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
 .cat-tile {
   border: 1px solid $cat-tile-outline;
   margin-bottom: 10px;
@@ -196,22 +219,33 @@ a {
   }
 
   .hovercard {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
+    @include hoverable;
+    background-color: $dark-color2;
+    opacity: 0.3;
+    z-index: 99;
+  }
+
+  .hovertext{
+    position:absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
-    z-index: 100;
-    background-color: $dark-color2;
     display: none;
-    opacity: 0.3;
+    // text-align: center;
+    color: $dark-background;
+    font-size: 20px;
+    .fa {
+      font-size: 2em;
+    }
   }
 }
 
 h1 {
   font-size: 3em;
+}
+
+.center {
+  margin: 0 auto;
 }
 
 p {

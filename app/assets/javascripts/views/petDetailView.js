@@ -9,9 +9,8 @@ AdoptMeme.Views.petDetailView = Backbone.View.extend({
   },
 
   toggleHoverCard: function (event) {
-    console.log(event.currentTarget)
-    console.log(event.target)
     this.$el.find('.hovercard').toggle()
+    this.$el.find('.hovertext').slideToggle('fast')
   },
 
   render: function () {
