@@ -3,13 +3,18 @@
 $font-stack: Open Sans, Helvetica, sans-serif;
 $header-font-stack: Roboto Slab, Rockwell, Open Sans, sans-serif;
 $dark-text-color: #333;
-$light-background: #A5FFFA;
+// $light-background: #A5FFFA;
+// $light-background: #12B8B0;
+$light-background: #12B8B0;
 $dark-background: #00B3AB;
-$icon-color: #002422;
+// $icon-color: #002422;
+$icon-color: #004A46;
 $hyperlink-color: #A9E6DB;
 $dark-color2: #006662;
 $highlight: #EAFFFA;
 $cat-tile-outline: #B8FFDD;
+$btn-color: #E64F00;
+$btn-hover-color: #993500;
 
 body, html {
   font-family: $font-stack;
@@ -76,7 +81,7 @@ h2 {
     }
   }
 
- div.submit a.submit:active {
+  a.submit:active {
       position: relative;
       background-color: red;
       top: 2px;
@@ -93,10 +98,14 @@ h2 {
   font-family: $header-font-stack;
   font-weight: heavy;
   color: $highlight;
-  background-color: red;
+  background-color: $btn-color;
   font-size: 1em;
   text-transform: uppercase;
 }
+
+.btn.submit:hover {
+    background-color: $btn-hover-color;
+  }
 
 .btn.nav {
   display: block;
@@ -123,7 +132,7 @@ input[type=text] {
   border: none;
   font-size: 30px;
   width: 100%;
-  background-color: $light-background;
+  background-color: $highlight;
   color: $icon-color;
 }
 
@@ -155,7 +164,7 @@ button:focus {
 .content-container {
   margin-left: 25%;
   box-sizing: border-box;
-  background-color: $highlight;
+  background-color: $light-background;
   min-height: 100vh;
 
   .inner-container {
