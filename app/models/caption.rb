@@ -16,7 +16,6 @@ class Caption < ActiveRecord::Base
   MEME_FONT = '/Library/Fonts/Impact.ttf'
 
   validates :image_id, :presence => true
-  validates :top_text_align, :bottom_text_align, :inclusion => ["center", "left", "right"]
 
   belongs_to :image
   belongs_to :captioner, :foreign_key => :captioner_id, :class_name => "User"
