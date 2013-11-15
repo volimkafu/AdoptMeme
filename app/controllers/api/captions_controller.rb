@@ -1,6 +1,6 @@
 class Api::CaptionsController < ApplicationController
   def index
-    @captions = Caption.limit(20)
+    @captions = Caption.all
     render :json => @captions, :include => :image_pet
   end
 
