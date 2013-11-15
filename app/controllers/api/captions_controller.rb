@@ -12,7 +12,7 @@ class Api::CaptionsController < ApplicationController
   def create
     @caption = Caption.create(params[:caption])
     if @caption.save
-      render :json => @caption
+      render :json => @caption, :include => :image_pet
     else
       puts @caption.errors.full_messages
       render :json => @caption.errors.full_messages, :status => :bad_request
@@ -22,7 +22,7 @@ class Api::CaptionsController < ApplicationController
   def show
     @caption = Caption.find(params[:id])
     if !!@caption
-      render :json => @caption
+      render :json => @caption, :include => :image_pet
     else
       render :json => ["No caption found"], :status => :bad_request
     end

@@ -18,6 +18,7 @@ class Image < ActiveRecord::Base
   def push_petfinder_image_to_aws
     begin
       sleep 0.25 # slow down requests to petfinder.
+      raise 'Invalid image url' if self.petfinder_url.include?('///')
       image = RestClient.get(self.petfinder_url)
       create_aws_object(self.aws_resource_name, image)
     rescue
