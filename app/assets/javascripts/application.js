@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializeJSON
+//= require jquery.avgrund
 //= require underscore
 //= require backbone
 //= require adopt_meme
