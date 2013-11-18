@@ -3,10 +3,8 @@ module Storable
   # For details on the workings of aws-sdk, see the docs at
   # http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html
 
-  BUCKET_NAME = :adoptmeme
-
   def bucket
-    @bucket ||= s3.buckets[BUCKET_NAME]
+    @bucket ||= s3.buckets[ENV["ADOPTMEME_AWS_BUCKET_NAME"]]
   end
 
   def s3
