@@ -18,7 +18,11 @@ module Storable
   end
 
   def set_amazon_aws_url
-    self.amazon_aws_url = "http://s3.amazonaws.com/adoptmeme/" + aws_resource_name
+    self.amazon_aws_url = Addressable::URI.new(
+        scheme: "http",
+        host: "s3.amazonaws.com",
+        path: [ENV["ADOPTMEME_AWS_BUCKET_NAME"], aws_resource_name].join('/')
+      ).to_s
     self.save
   end
 
