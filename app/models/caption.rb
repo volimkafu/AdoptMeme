@@ -1,5 +1,3 @@
-require 'adopt_meme_aws_helper'
-
 class Caption < ActiveRecord::Base
   attr_accessible :bottom_text,
                   :bottom_text_align,
@@ -9,7 +7,7 @@ class Caption < ActiveRecord::Base
                   :image,
                   :captioner_id
 
-  include AdoptMemeAwsHelper
+  include Storable
   include Magick
 
   WATERMARK_FONT = '/Library/Fonts/Helvetica.ttf'

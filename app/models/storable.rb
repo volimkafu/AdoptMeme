@@ -1,4 +1,5 @@
-module AdoptMemeAwsHelper
+module Storable
+  extend ActiveSupport::Concern
   # For details on the workings of aws-sdk, see the docs at
   # http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html
 

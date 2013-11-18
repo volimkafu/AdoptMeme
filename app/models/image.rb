@@ -1,7 +1,5 @@
-require 'adopt_meme_aws_helper'
-
 class Image < ActiveRecord::Base
-  include AdoptMemeAwsHelper
+  include Storable
 
   validates :petfinder_url, :presence => true
 
