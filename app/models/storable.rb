@@ -3,6 +3,10 @@ module Storable
   # For details on the workings of aws-sdk, see the docs at
   # http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html
 
+  def aws_resource_name
+    raise "AWS resource name not set."
+  end
+
   def bucket
     @bucket ||= s3.buckets[ENV["ADOPTMEME_AWS_BUCKET_NAME"]]
   end
