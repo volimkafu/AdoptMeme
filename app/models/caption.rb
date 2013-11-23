@@ -10,9 +10,6 @@ class Caption < ActiveRecord::Base
   include Storable
   include Magick
 
-  WATERMARK_FONT = '/Library/Fonts/Helvetica.ttf'
-  MEME_FONT = '/Library/Fonts/Impact.ttf'
-
   validates :image_id, :presence => true
 
   belongs_to :image
@@ -43,6 +40,14 @@ class Caption < ActiveRecord::Base
       @source ||= Image.from_blob(@image_src).first
     end
 
+    def meme_font
+      APP_CONFIG["MEME_FONT_LOCATION"]
+    end
+
+    def watermark_font
+      APP_CONFIG["WATERMARK_FONT_LOCATION"]
+    end
+
     def fontsize(msg)
       d = Draw.new
       pointsize = d.pointsize = 0
@@ -70,12 +75,21 @@ class Caption < ActiveRecord::Base
     end
 
     def set_meme_annotation_settings(draw)
-      draw.font = MEME_FONT
+      draw.font = meme_font()
       draw.fill = 'white'
       draw.stroke = 'black'
       draw.interline_spacing = -5
       draw.stroke_width = 2
       draw.font_weight = BolderWeight
+    end
+
+    def set_watermark_annotation_settings(draw)
+      draw.gravity = SouthEastGravity
+      draw.font_weight = BoldWeight
+      draw.pointsize = 20
+      draw.fill = '#EAFFFA'
+      draw.undercolor = '#E64F00'
+      draw.font = watermark_font
     end
 
     def draw_top_text
@@ -110,14 +124,9 @@ class Caption < ActiveRecord::Base
 
     def draw_watermark
       link = "AdoptMe.me/#{self.id}"
-      Draw.new.annotate(self.source, 0,0,0,0, link) {
-        self.gravity = SouthEastGravity
-        self.font = WATERMARK_FONT
-        self.font_weight = BoldWeight
-        self.pointsize = 20
-        self.fill = '#EAFFFA'
-        self.undercolor = '#E64F00'
-      }
+      draw = Draw.new
+      set_watermark_annotation_settings(draw)
+      draw.annotate(self.source, 0, 0, 0, 0, link)
     end
 
     def insert_newlines(message)
