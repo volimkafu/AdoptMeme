@@ -2,8 +2,8 @@
 
 AdoptMe.me is intended to be a platform for cat image macro creation and
 sharing.  On AdoptMeme, you're making memes and doing good at the same time.
-All of the animals featured on AdoptMeme are in need of adoption, so creatinga
-nd sharing funny cat pictures you are also helping animals in need. 
+All of the animals featured on AdoptMeme are in need of adoption, so creating
+and sharing funny cat pictures you are also helping animals in need. 
 
 ## Completed features:
 - Petfinder.com integration
@@ -16,7 +16,7 @@ nd sharing funny cat pictures you are also helping animals in need.
 - S3 integration (or other third-party image hosting solution.)
     - Write a `Saveable` module following the template pattern for saving images and
       captioned images to Amazon S3. My `ActiveRecord::Base` subclasses
-      extending the `Saveable` module only need specify their own AWS resource
+      including the `Saveable` module only need specify their own AWS resource
       names.
     - Environment-specific bucket configuration prevents local development from
       clobbering the contents of the AWS bucket used in production.
