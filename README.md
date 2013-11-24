@@ -13,11 +13,12 @@ and sharing funny cat pictures you are also helping animals in need.
     - Store pet info (name, breed, age, etc) into `Pet` models. We may want to
       use some of this info on a "pet show" page
 
-- S3 integration (or other third-party image hosting solution.)
-    - Write a `Saveable` module following the template pattern for saving images and
-      captioned images to Amazon S3. My `ActiveRecord::Base` subclasses
-      including the `Saveable` module only need specify their own AWS resource
-      names.
+- Amazon S3 integration 
+    - Wrote a `Saveable` module using `aws-sdk` that follows the template
+      pattern for saving images and captioned images to Amazon S3. My
+      `ActiveRecord::Base` subclasses including the `Saveable` module only need
+      specify their own AWS resource names.
+    - Set bucket permissions: public gets read-only.
     - Environment-specific bucket configuration prevents local development from
       clobbering the contents of the AWS bucket used in production.
 
