@@ -1,7 +1,7 @@
 development:
-  MEME_FONT_LOCATION: '/Library/Fonts/Impact.ttf'
-  WATERMARK_FONT_LOCATION: '/Library/Fonts/Helvetica.ttf'
+  MEME_FONT_LOCATION: "./app/assets/fonts/Impact.ttf"
+  WATERMARK_FONT_LOCATION: "./app/assets/fonts/Arial.ttf"
 
 production:
-  MEME_FONT_LOCATION: "#{::Rails.root}/public/fonts/Impact.ttf"
-  WATERMARK_FONT_LOCATION: "#{::Rails.root}/public/fonts/Helvetica.ttf"
+  MEME_FONT_LOCATION: "./app/assets/fonts/Impact.ttf"
+  WATERMARK_FONT_LOCATION: "./app/assets/fonts/Arial.ttf"
