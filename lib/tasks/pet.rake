@@ -15,7 +15,7 @@ namespace :pet do
 
 	desc "Update pet availability with calls to the Petfinder API"
 	task :remove_expired => :environment do
-		Pet.remove_expired
+		Pet.remove_expired_pets
 	end
 
 	desc "Refresh Pet database, removing expired and replacing with new"

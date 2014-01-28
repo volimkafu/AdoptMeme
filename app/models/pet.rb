@@ -38,13 +38,35 @@ class Pet < ActiveRecord::Base
     end
   end
 
+  def url_to_check_availability
+    Addressable::URI.new(
+      scheme: "http",
+      host: "api.petfinder.com",
+      path: "pet.get",
+      query_values: {
+        :key => @@petfinder_api_key,
+        :format => :json,
+        :id => petfinder_id
+      }
+    ).to_s
+  end
+
+  def update_availability(availability)
+    if availability != pet_available
+      self.pet_available = availability
+      save
+    end
+  end
+
   private
     def self.parse_pets_from_petfinder_json(payload)
+      pets_already_seen = Pet.pluck(:petfinder_id)
       payload["petfinder"]["pets"]["pet"].each do |pet_record|
         pet = Pet.new
+        pet.petfinder_id = pet_record["id"]["$t"]
+        next if pets_already_seen.include?(pet.petfinder_id)
         pet.name = pet_record["name"]["$t"].split("_").first.gsub(/[0-9]/, '')
         pet.sex = pet_record["sex"]["$t"]
-        pet.petfinder_id = pet_record["id"]["$t"]
         pet.shelter_id = pet_record["shelterId"]["$t"]
         pet.description = pet_record["description"]["$t"]
 
@@ -55,28 +77,9 @@ class Pet < ActiveRecord::Base
             image.petfinder_url = photo["$t"]
           end
         end
-
-        pet.save unless pet.images.empty?
+        pet.save! unless pet.images.empty?
       end
     end
 
-    def url_to_check_availability
-      Addressable::URI.new(
-        scheme: "http",
-        host: "api.petfinder.com",
-        path: "pet.get",
-        query_values: {
-          :key => @@petfinder_api_key,
-          :format => :json,
-          :id => petfinder_id
-        }
-      ).to_s
-    end
 
-    def update_availability(availability)
-      if availability != pet_available
-        self.pet_available = availability
-        save
-      end
-    end
 end
