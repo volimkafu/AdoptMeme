@@ -51,14 +51,13 @@ class Caption < ActiveRecord::Base
     def fontsize(msg)
       d = Draw.new
       pointsize = d.pointsize = 0
-      allowable_width = self.source.columns*0.90
-      allowable_height = self.source.rows * 0.30
+      allowable_width = self.source.columns*0.95
+      allowable_height = msg.length > 10 ? (self.source.rows * 0.40) : (self.source.rows * 0.40) 
       until ((d.get_multiline_type_metrics(msg).width > allowable_width) ||
         (d.get_multiline_type_metrics(msg).height > allowable_height))
-        pointsize += 10
+        pointsize += 5
         d.pointsize = pointsize
       end
-
       pointsize
     end
 
@@ -74,13 +73,17 @@ class Caption < ActiveRecord::Base
       self.source.quantize(256, GRAYColorspace).contrast(true)
     end
 
-    def set_meme_annotation_settings(draw)
+    def set_meme_annotation_settings(draw, formatted_text)
       draw.font = meme_font()
+      computed_pointsize = fontsize(formatted_text)
+      draw.pointsize = computed_pointsize
       draw.fill = 'white'
       draw.stroke = 'black'
       draw.interline_spacing = -5
-      draw.stroke_width = 2
-      draw.font_weight = BolderWeight
+      draw.stroke_width = computed_pointsize > 80 ? 4 : 2
+      draw.stroke_antialias(true)
+      draw.text_antialias(true)
+      draw.font_weight = 900
     end
 
     def set_watermark_annotation_settings(draw)
@@ -94,9 +97,8 @@ class Caption < ActiveRecord::Base
 
     def draw_top_text
       d = Draw.new
-      set_meme_annotation_settings(d)
       formatted_text = insert_newlines(self.top_text)
-      d.pointsize = fontsize(formatted_text)
+      set_meme_annotation_settings(d, formatted_text)
 
       case self.top_text_align
       when "center" then d.gravity = NorthGravity
@@ -109,9 +111,8 @@ class Caption < ActiveRecord::Base
 
     def draw_bottom_text
       d = Draw.new
-      set_meme_annotation_settings(d)
       formatted_text = insert_newlines(self.bottom_text)
-      d.pointsize = fontsize(formatted_text)
+      set_meme_annotation_settings(d, formatted_text)
 
       case self.bottom_text_align
       when "center" then d.gravity = SouthGravity
