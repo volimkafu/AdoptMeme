@@ -1,34 +1,132 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800|Roboto+Slab:400,800);
+@import url(http://fonts.googleapis.com/css?family=Kreon|Open+Sans);
 
 $font-stack: Open Sans, Helvetica, sans-serif;
-$header-font-stack: Roboto Slab, Rockwell, Open Sans, sans-serif;
-$dark-text-color: #333;
-// $light-background: #A5FFFA;
-// $light-background: #12B8B0;
-$light-background: #12B8B0;
-$dark-background: #00B3AB;
-// $icon-color: #002422;
-$icon-color: #004A46;
-$hyperlink-color: #A9E6DB;
-$dark-color2: #006662;
-$highlight: #EAFFFA;
-$cat-tile-outline: #B8FFDD;
-$btn-color: #E64F00;
-$btn-hover-color: #993500;
+$header-font-stack: Kreon, Rockwell, Open Sans, sans-serif;
+$light: #FFF;
+$dark: lighten(#000, 10%);
+$hyperlink-color: $dark;
+$highlight: desaturate(lighten( $dark, 90% ), 25%);
+$margin-bottom: 20px;
+$emph: #FF0000;
 
-body, html {
-  font-family: $font-stack;
-  color: $dark-text-color;
+body {
+     /*background: url("http://25.media.tumblr.com/c2bc6de109c9f829cf92c0be11e9294b/tumblr_mxd61gzzqD1t0i1e4o1_400.gif") no-repeat center center fixed; */
+     /*background: url("http://25.media.tumblr.com/4e1f8511c25b070208c5bc424502ecc9/tumblr_mx7dlph67L1s199fdo1_250.gif") no-repeat center center fixed; */
+     /*background: url("http://31.media.tumblr.com/f81af2c5c18950d411a4c6d4c39a5f06/tumblr_mvsx1npiXI1spnz0yo1_400.gif") no-repeat center center fixed; */
+     // /*background: url("http://25.media.tumblr.com/86da8eee1bddc43cd7af9ff1f8e8da52/tumblr_mjxu9oHLb81racqsfo1_400.gif") no-repeat center center fixed; */
+     // background: url("http://24.media.tumblr.com/tumblr_mdg975Jbtj1r3gb3zo1_400.gif") no-repeat center center fixed;
+     /*background: url("") no-repeat center center fixed;*/
+     /*background: url("http://s3-ec.buzzfed.com/static/2013-10/enhanced/webdr06/15/10/anigif_enhanced-buzz-1376-1381846217-0.gif") no-repeat center center fixed;*/
+    /*background: url("http://31.media.tumblr.com/tumblr_m3p6beCA0g1rtbmh0o1_400.gif") no-repeat center center fixed; */
+    background: url("http://25.media.tumblr.com/tumblr_ma9b8rnlIg1ryvmmzo1_500.gif") no-repeat center center fixed;
+    background-size: cover;  
+    
+    padding: 0px 0px 0px 0px;
+    /*background: url("http://25.media.tumblr.com/tumblr_mdvesePMC51qgxioxo1_500.gif") no-repeat center center fixed;*/
+    font-family: Kreon, Bubblegum Sans, Roboto Slab, Helvetica, sans serif;
+    height: 100%;
+    color: white;
+    margin-top: 0;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    top: 0px;
+}
+
+html {
   padding: 0px;
   height: 100%;
-  background-color: $dark-background;
+}
+
+p {
+    padding: 0px; 
+    font-size: 1.25em;
+    font-family: $font-stack;
+    color: $dark;
+    margin-bottom: 25px;
+    /*margin: 100px;*/
+}
+
+.adoptmeme-hero p {
+  width: 60%;
+  position: fixed;
+  z-index:10;
+  padding: 100px;
+  color: $light;
+  font-size: 3em;
+  line-height: 80px;
+  margin-left: 75px;
+}
+
+.adoptmeme-hero {
+    font-family: $header-font-stack;
+    height: 90vh;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-size: 2em;
+    z-index:99;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(255,0,0,.2);
+    padding: 0px 0px 0px 0px;
+    margin: 0;
+    position: absolute;
+    top: 0px;
+    z-index: 150;
+}
+
+div.topbar{
+  font-size: 3em;
+  line-height: 60px;
+  width: 100%;
+  background: white;
+  color: black;
+  border-bottom: 1px solid black;
+  text-shadow: none;
+  z-index:6000;
+}
+
+#title {
+  font-family: $header-font-stack;
+  width: 38%;
+  padding-left: 25px;
+  vertical-align: middle;
+}
+
+#subtitle {
+  font-size: 40%;
+  font-family: Open Sans;
+  text-shadow: none;
+  text-align: right;
+  padding-left: 2%;
+  width: 55%;      
+  vertical-align: middle;
+}
+
+.not-stuck {
+  position: relative;
+}
+
+.stuck {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    color: black;
+}
+
+span {
+  display: inline-block;
 }
 
 .loadmsg {
   text-align: center;
-  color: $btn-color;
+  color: $dark;
   font-family: $header-font-stack;
-  font-size: 2.5em;
+  font-size: 1.5em;
 }
 
 h1, h2, h3 {
@@ -56,80 +154,41 @@ h2 {
   input {
     text-transform: uppercase;
   }
+
   .canvas-container {
     display: inline-block;
     position: relative;
     margin: 0 auto;
     padding: 0;
   }
-
-  .btn-group {
-    display: inline-block;
-    padding: 0;
-    border-radius: 5px;
-    overflow: hidden;
-    font-size: 30px;
-    width: 30%;
-    border: 1px solid $dark-color2;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    a {
-      box-sizing: border-box;
-      display: inline-block;
-      text-align: center;
-      padding: 10px;
-      width: 33%;
-      color: $dark-color2;
-      background-color: $highlight;
-    }
-
-    a.selected {
-      color: $highlight;
-      background-color: $dark-color2;
-    }
-  }
-
-  a.submit:active {
-      position: relative;
-      background-color: red;
-      top: 2px;
-  }
-
 }
 
-.btn.submit {
+.btn {
   display: block;
+  float: left;
   width: 40%;
-  text-align: center;
-  padding: 10px;
-  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 5px;
   margin-bottom: 5px;
-  font-family: $header-font-stack;
-  font-weight: heavy;
+
+  text-align: center;
+  font-family: $font-stack;
+  font-weight: bold;
+
   color: $highlight;
-  background-color: $btn-color;
-  font-size: 1em;
+  background-color: $dark;
   text-transform: uppercase;
 }
 
-.btn.submit:hover {
-    background-color: $btn-hover-color;
-  }
+.btn:hover {
+    background-color: lighten( $dark, 10% );
+}
 
-.btn.nav {
-  display: block;
-  text-align: center;
-  vertical-align: center;
-  valign: center;
-  padding: 10px;
-  margin: 0 auto;
-  font-family: $header-font-stack;
-  font-weight: heavy;
-  color: $highlight;
-  background-color: $icon-color;
-  font-size: 1em;
-  text-transform: uppercase;
+.btn.emph i {
+  color: $emph;
 }
 
 input[type=text] {
@@ -143,7 +202,7 @@ input[type=text] {
   font-size: 30px;
   width: 100%;
   background-color: $highlight;
-  color: $icon-color;
+  color: $dark;
 }
 
 input:focus,
@@ -153,39 +212,31 @@ button:focus {
     outline: none;
 }
 
-.sidebar {
-  color: $highlight;
-  box-sizing: border-box;
-  width: 25%;
-  max-width: 400px;
-  height: 100%;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  padding: 10px;
-  position: fixed;
-  p {
-    font-size: 1.35em;
-    line-height: 125%;
-    padding: 10px;
-  }
-}
-
 .content-container {
-  margin-left: 25%;
-  box-sizing: border-box;
-  background-color: $light-background;
+  background-color: $light;
+  position: relative; 
+  z-index: 5000;
+  width: 100%;
   min-height: 100vh;
 
   .inner-container {
-    width: 500px;
+    width: 70%;
     padding-top: 25px;
     margin: 0 auto;
-  }
 
-  img {
-    display: block;
-    margin: 0 auto;
+    img {
+      max-width: 100%;
+      margin-bottom: $margin-bottom;
+      max-height: 500px;
+      float: right;
+    }
+
+    div {
+      width: 48%;
+      float: left;
+      margin-left: 1%;
+      margin-right: 1%;
+    }
   }
 }
 
@@ -194,21 +245,17 @@ a {
   color: $hyperlink-color;
 }
 
+a:hover {
+  color: $emph;
+}
+
 .cat-tile-container {
-  width: 95%;
-  padding-top: 5px;
+  width: 100%;
+  padding-top: 0px;
+  padding: 0px;
   margin: 0px auto;
   border: 0px solid blue;
   overflow: auto;
-}
-
-.cat-tile-column {
- margin-right: 1.5%;
- margin-left: 1.5%;
- padding-top: 20px;
- width: 30%;
- border: 0px solid #00DA55;
- float: left;
 }
 
 @mixin hoverable {
@@ -220,22 +267,24 @@ a {
   right: 0px;
 }
 
+.greyscale {
+  filter: grayscale(0.8) brightness(1) contrast(1);
+  -webkit-filter: grayscale(0.8) brightness(1) contrast(1);
+
+}
+
 .cat-tile {
-  border: 1px solid $cat-tile-outline;
-  margin-bottom: 10px;
-  /*border-radius: 0px 0px 10px 10px;*/
-  background-size: cover;
+  background-size: contain;
   position: relative;
   overflow: hidden;
-  img {
-    width: 100%;
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
-  }
+  height: 250px;
+  width: 30%;
+  margin-left: 7px;
+  margin-bottom: $margin-bottom;
+  display: inline-block;
+
   .cat-name {
-    background-color: $dark-background;
-    color: $light-background;
+    color: $dark;
     padding: 0px;
     text-align: center;
     padding: 0px;
@@ -248,7 +297,7 @@ a {
 
   .hovercard {
     @include hoverable;
-    background-color: $dark-color2;
+    // background-color: $dark;
     opacity: 0.3;
     z-index: 99;
   }
@@ -260,7 +309,7 @@ a {
     right: 0px;
     display: none;
     // text-align: center;
-    color: $dark-background;
+    color: black;
     font-size: 20px;
     .fa {
       font-size: 2em;
@@ -268,12 +317,14 @@ a {
   }
 }
 
-.center {
-  margin: 0 auto;
+.pet-description {
+  color: $dark;
+  font-size: 1em;
 }
 
-p {
-  font-size: 1.35em;
-  line-spacing: 100%;
-  padding: 10px;
+.clearfix:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
 }
