@@ -16,12 +16,11 @@ AdoptMeme.Views.petDetailView = Backbone.View.extend({
 
   render: function () {
     var that = this;
-    var bgString = 'url("' + this.model.attributes.amazon_aws_url + '") no-repeat center center';
     var renderedContent = this.template({ image: that.model.attributes });
     this.$el.html(renderedContent);
 
-    this.$el.css("background", bgString);
-    this.$el.addClass("cf")
+    this.$el.css("margin-bottom", window.innerWidth*0.02);
+
     return this
   }
 

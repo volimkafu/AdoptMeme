@@ -117,7 +117,7 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
   	var context = this.$context;
   	var canvas = this.$canvas;
     var startText = text.slice(0,30);
-    context.fontsize = 60;
+    context.fontsize = 90;
     context.font = "bold "+context.fontsize+"px Impact, sans-serif";
     while (context.measureText(startText).width > (canvas.width-20)) {
       ypos = ypos - 2;

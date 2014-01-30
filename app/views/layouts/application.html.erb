@@ -14,16 +14,6 @@
 
 <div class="container">
 
-
-  <div class="adoptmeme-hero">
-      <p>Contribute humor to help cats in need.</p>
-  </div>
-
-  <div class="topbar not-stuck">
-    <a id="title" href="/">AdoptMe.me</a>
-    <span id="subtitle">All the animals you see on this site are available for adoption.</span>
-  </div>
-
   <div class="content-container clearfix">
   </div>
 
@@ -32,26 +22,26 @@
 
 </body>
 
-  <script type="text/javascript">
-    $(document).ready( function () {
-        var $navbar = $(".topbar");
-        var $viewH = $("window").height();
-        var objDistance = $navbar.offset().top;
-        $(window).scroll( function() {
-          var distScrolled = $(window).scrollTop();
-          console.log($(window).scrollTop())
-          console.log($navbar)
-          console.log(objDistance)
-          if (distScrolled >= objDistance) {
-              $navbar.removeClass('not-stuck');
-              $navbar.addClass('stuck')
-          }
-          else if (distScrolled < objDistance) {
-              $navbar.addClass('not-stuck')
-              $navbar.removeClass('stuck');
-          }
-      });
-    })
+ <script type="text/javascript">
+  //   $(document).ready( function () {
+  //       var $navbar = $(".topbar");
+  //       var $viewH = $("window").height();
+  //       var objDistance = $navbar.offset().top;
+  //       $(window).scroll( function() {
+  //         var distScrolled = $(window).scrollTop();
+  //         console.log($(window).scrollTop())
+  //         console.log($navbar)
+  //         console.log(objDistance)
+  //         if (distScrolled >= objDistance) {
+  //             $navbar.removeClass('not-stuck');
+  //             $navbar.addClass('stuck')
+  //         }
+  //         else if (distScrolled < objDistance) {
+  //             $navbar.addClass('not-stuck')
+  //             $navbar.removeClass('stuck');
+  //         }
+  //     });
+  //   })
   </script>
 
 
