@@ -28,7 +28,7 @@ AdoptMeme.Routers.applicationRouter = Backbone.Router.extend({
           model: AdoptMeme.petImages.get(image_id)
         });
         that._swapView(newCaptionView)
-        newCaptionView.animateEditor()
+        newCaptionView.configureEditor()
       }
     })
   },

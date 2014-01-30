@@ -4,7 +4,8 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	template: JST["captions/new"],
 
 	events: {
-		"click .submit": "postCaptionCreate"
+		"click .submit": "postCaptionCreate",
+		"keyup" : "refreshText",
 	},
 
 	render: function () {
@@ -45,7 +46,7 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 		context.fillStyle = "black";
 		context.fillRect(xpos-170, ypos-15, xpos, ypos + 10);
 
-		// Draw watermark text in lower right corner
+		// Draw watermark text
 		context.fillStyle = "white";
 		context.font = "bold 20px Arial, sans serif";
 		context.textAlign = "right";
@@ -70,12 +71,14 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 		);
 	},
 
-	animateEditor: function () {
+	configureEditor: function () {
 	  var canvas = this.$canvas = $("#catCanvas")[0];
 	  var context = this.$context = canvas.getContext("2d");
 
-	  var background = new Image();
+	  var background = this.background = new Image();
 	  background.src = "/api/proxy_images/" + this.model.attributes.id;
+
+	  this.$topText = $("#toptext");
 
 	  // Make sure the image is loaded first otherwise nothing will draw.
 	  background.onload = function(){
@@ -85,65 +88,64 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	      $(".editor-container").css("width", this.width);
 	      context.drawImage(background,0,0);
 	    };
+	  },
 
-	  function render() {
-	    context.drawImage(background,0,0);
-	    context.lineJoin = "bevel";
-	    var topText = $("#toptext").val().toUpperCase();
-	    var bottomText = $("#bottomtext").val().toUpperCase();
+  refreshText: function () {
+    var context = this.$context;
+    var canvas = this.$canvas;
+    var topText = this.$topText.val().toUpperCase();
+    var bottomText = $("#bottomtext").val().toUpperCase();
 
-	    var center_x = canvas.width / 2;
-	    var bottom_y = canvas.height - 50;
+    context.drawImage(this.background,0,0);
+    context.lineJoin = "bevel";
 
-	    context.textAlign = "center";
-	    context.font = "bold 60px Impact, sans-serif";
-	    context.lineWidth = 3;
-	    context.fillStyle = "white";
-	    context.strokeStyle = "black";
+    var center_x = canvas.width / 2;
+    var bottom_y = canvas.height - 50;
 
-	    drawTopText(topText, center_x, 65);
+    context.textAlign = "center";
+    context.lineWidth = 3;
+    context.fillStyle = "white";
+    context.strokeStyle = "black";
 
-	    context.lineWidth = 2.5;
-	    drawBottomText(bottomText, center_x);
-	  }
+    this.drawTopText(topText, center_x, 65);
 
-	  function drawText(text, xpos, ypos) {
-	    var startText = text.slice(0,30);
-	    context.font = "bold "+context.fontsize+"px Impact, sans-serif";
-	    while (context.measureText(startText).width > (canvas.width-20)) {
-	      ypos = ypos - 2;
-	      context.fontsize = context.fontsize - 4;
-	      context.lineWidth = context.lineWidth - 0.1;
-	      context.font = "bold "+context.fontsize+"px Impact, sans-serif";
-	    }
+    context.lineWidth = 2.5;
+    this.drawBottomText(bottomText, center_x);
+  },
 
-	    context.fillText(startText, xpos, ypos);
-	    context.strokeText(startText, xpos, ypos);
-	  }
+  drawText: function (text, xpos, ypos) {
+  	var context = this.$context;
+  	var canvas = this.$canvas;
+    var startText = text.slice(0,30);
+    context.fontsize = 60;
+    context.font = "bold "+context.fontsize+"px Impact, sans-serif";
+    while (context.measureText(startText).width > (canvas.width-20)) {
+      ypos = ypos - 2;
+      console.log(console.fontsize);
+      context.fontsize = context.fontsize - 4;
+      context.lineWidth = context.lineWidth - 0.1;
+      context.font = "bold "+context.fontsize+"px Impact, sans-serif";
+    }
 
-	  function drawTopText(text, xpos, ypos) {
-	    drawText(text.slice(0,30), xpos, ypos);
-	    if (text.slice(30) !== "") {
-	      drawTopText(text.slice(30), xpos, ypos+40);
-	    }
-	  }
+    context.fillText(startText, xpos, ypos);
+    context.strokeText(startText, xpos, ypos);
+  },
 
-	  function drawBottomText(text, xpos) {
-	    var lines = Math.ceil(text.length/30);
-	    ypos = canvas.height - lines*30;
-	    for (var i=0; i < lines; i++) {
-	      drawText(text.slice(i*30, (i+1)*30), xpos, ypos);
-	      ypos += 40;
-	    }
-	  }
+  drawTopText: function (text, xpos, ypos) {
+    this.drawText(text.slice(0,30), xpos, ypos);
+    if (text.slice(30) !== "") {
+      this.drawTopText(text.slice(30), xpos, ypos+40);
+    }
+  },
 
-	  $("#toptext").on("keyup", function () {
-	    render();
-	  });
-
-	  $("#bottomtext").on("keyup", function () {
-	    render();
-	  });
-	}
+  drawBottomText: function (text, xpos) {
+  	var canvas = this.$canvas;
+    var lines = Math.ceil(text.length/30);
+    var ypos = canvas.height - lines*30;
+    for (var i=0; i < lines; i++) {
+      this.drawText(text.slice(i*30, (i+1)*30), xpos, ypos);
+      ypos += 40;
+    }
+  }
 
 });
