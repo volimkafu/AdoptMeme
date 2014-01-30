@@ -19,6 +19,13 @@ class Api::CaptionsController < ApplicationController
     end
   end
 
+  def update
+    @caption = Caption.find(params[:id])
+    @img_blob = decode_img_data(params[:imgData])
+    @caption.create_aws_object(@img_blob)
+    render :json => true # Ajax expects a JSON response.
+  end
+
   def show
     @caption = Caption.find(params[:id])
     if !!@caption
@@ -28,4 +35,11 @@ class Api::CaptionsController < ApplicationController
     end
   end
 
+  require 'base64'
+
+  private
+    def decode_img_data(raw)
+      body = raw[22..raw.length] # Strip out leading "data:image/png;base64,"
+      Base64.decode64(body)
+    end
 end

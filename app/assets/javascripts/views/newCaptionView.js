@@ -1,42 +1,70 @@
 AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	$el: $(".content-container"),
 
-	template: JST['captions/new'],
+	template: JST["captions/new"],
 
 	events: {
-		"click .submit": 'postCaptionCreate'
+		"click .submit": "postCaptionCreate"
 	},
 
 	render: function () {
-		var renderedContent = this.template({ 
+		var renderedContent = this.template({
 			pet: AdoptMeme.pets.get(this.model.attributes.pet_id),
 			image: this.model.attributes
-		})
-		this.$el.html(renderedContent)
-		return this
+		});
+		this.$el.html(renderedContent);
+		return this;
 	},
 
 	postCaptionCreate: function (event) {
 		var that = this;
 		event.preventDefault();
-		this.$el.find('.loadmsg').slideToggle('slow')
-		this.$el.find('.submit').slideToggle('fast')
-		var formData = $('form').serializeJSON();
+		this.$el.find(".loadmsg").slideToggle("slow");
+		this.$el.find(".submit").slideToggle("fast");
+		var formData = $("form").serializeJSON();
 		var caption = new AdoptMeme.Models.caption(formData.caption);
 		caption.save({}, {
 			success: function () {
 				AdoptMeme.captions.add(caption);
-				var route = "/"+caption.id.toString()
-				AdoptMeme.Routers.router.navigate(route, {trigger: true})
+				that.watermarkImage(caption);
+				that.uploadImage(caption);
 			},
 			error: function () {
-				alert('you suck')
+				alert("you suck");
 			}});
 	},
 
-	animateEditor: function () {	
-	  var canvas = $('#catCanvas')[0];
-	  var context = canvas.getContext('2d');
+	watermarkImage: function (caption) {
+		var watermark = "AdoptMe.me/" + caption.id;
+		var context = this.$context;
+		context.fontsize = 20;
+		context.fillStyle = "red";
+		this.$context.fillText(watermark, 50, 50);
+	},
+
+	uploadImage: function (caption) {
+		caption.set( {
+			"imgData" : this.$canvas.toDataURL()
+		});
+		caption.save({},
+			{
+				success:
+					function () {
+						var route = "/"+caption.id.toString();
+						AdoptMeme.Routers.router.navigate(route, {trigger: true});
+					},
+
+					error:
+						function () {
+							console.log("There was a problem uploading the photo");
+						}
+			}
+		);
+	},
+
+	animateEditor: function () {
+	  var canvas = this.$canvas = $("#catCanvas")[0];
+	  var context = this.$context = canvas.getContext("2d");
 
 	  var background = new Image();
 	  background.src = "/api/proxy_images/" + this.model.attributes.id;
@@ -45,16 +73,16 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	  background.onload = function(){
 	      canvas.width = this.width;
 	      canvas.height = this.height;
-	      $('.canvas-container').css('width', this.width)
-	      $('.editor-container').css('width', this.width)
+	      $(".canvas-container").css("width", this.width);
+	      $(".editor-container").css("width", this.width);
 	      context.drawImage(background,0,0);
-	    }
+	    };
 
 	  function render() {
 	    context.drawImage(background,0,0);
-	    context.lineJoin = 'bevel';
-	    var topText = $('#toptext').val().toUpperCase();
-	    var bottomText = $('#bottomtext').val().toUpperCase();;
+	    context.lineJoin = "bevel";
+	    var topText = $("#toptext").val().toUpperCase();
+	    var bottomText = $("#bottomtext").val().toUpperCase();
 
 	    var center_x = canvas.width / 2;
 	    var bottom_y = canvas.height - 50;
@@ -66,15 +94,15 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	    context.fillStyle = "white";
 	    context.strokeStyle = "black";
 
-	    drawTopText(topText, center_x, 65)
+	    drawTopText(topText, center_x, 65);
 
 	    context.lineWidth = 2.5;
 	    context.fontsize = 75;
-	    drawBottomText(bottomText, center_x)
+	    drawBottomText(bottomText, center_x);
 	  }
 
 	  function drawText(text, xpos, ypos) {
-	    var startText = text.slice(0,30)
+	    var startText = text.slice(0,30);
 	    context.font = "bold "+context.fontsize+"px Impact, sans-serif";
 	    while (context.measureText(startText).width > (canvas.width-20)) {
 	      ypos = ypos - 2;
@@ -88,7 +116,7 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	  }
 
 	  function drawTopText(text, xpos, ypos) {
-	    drawText(text.slice(0,30), xpos, ypos)
+	    drawText(text.slice(0,30), xpos, ypos);
 	    if (text.slice(30) !== "") {
 	      drawTopText(text.slice(30), xpos, ypos+40);
 	    }
@@ -98,18 +126,18 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	    var lines = Math.ceil(text.length/30);
 	    ypos = canvas.height - lines*30;
 	    for (var i=0; i < lines; i++) {
-	      drawText(text.slice(i*30, (i+1)*30), xpos, ypos)
+	      drawText(text.slice(i*30, (i+1)*30), xpos, ypos);
 	      ypos += 40;
 	    }
 	  }
 
-	  $('#toptext').on("keyup", function () {
+	  $("#toptext").on("keyup", function () {
 	    render();
 	  });
 
-	  $('#bottomtext').on("keyup", function () {
+	  $("#bottomtext").on("keyup", function () {
 	    render();
 	  });
 	}
 
-})
+});

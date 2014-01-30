@@ -17,10 +17,7 @@ body {
      // background: url("http://24.media.tumblr.com/tumblr_mdg975Jbtj1r3gb3zo1_400.gif") no-repeat center center fixed;
      /*background: url("") no-repeat center center fixed;*/
      /*background: url("http://s3-ec.buzzfed.com/static/2013-10/enhanced/webdr06/15/10/anigif_enhanced-buzz-1376-1381846217-0.gif") no-repeat center center fixed;*/
-    /*background: url("http://31.media.tumblr.com/tumblr_m3p6beCA0g1rtbmh0o1_400.gif") no-repeat center center fixed; */
-    background: url("http://25.media.tumblr.com/tumblr_ma9b8rnlIg1ryvmmzo1_500.gif") no-repeat center center fixed;
-    background-size: cover;  
-    
+    /*background: url("http://31.media.tumblr.com/tumblr_m3p6beCA0g1rtbmh0o1_400.gif") no-repeat center center fixed; */    
     padding: 0px 0px 0px 0px;
     /*background: url("http://25.media.tumblr.com/tumblr_mdvesePMC51qgxioxo1_500.gif") no-repeat center center fixed;*/
     font-family: Kreon, Bubblegum Sans, Roboto Slab, Helvetica, sans serif;
@@ -59,6 +56,8 @@ p {
 }
 
 .adoptmeme-hero {
+    background: url("http://25.media.tumblr.com/tumblr_ma9b8rnlIg1ryvmmzo1_500.gif") no-repeat center center fixed;
+    background-size: cover;  
     font-family: $header-font-stack;
     height: 90vh;
     width: 100%;

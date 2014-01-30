@@ -3,7 +3,7 @@ AdoptMeme::Application.routes.draw do
   resource :session, :only => [:new, :create, :destroy]
   root :to => "static_pages#root"
   namespace :api do
-    resources :captions, :only => [:create, :index, :new, :show]
+    resources :captions, :only => [:create, :index, :new, :show, :update]
     resources :images, :only => [:index]
     resources :proxy_images, :only => [:show]
   end
