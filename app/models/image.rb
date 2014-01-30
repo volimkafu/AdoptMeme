@@ -18,7 +18,7 @@ class Image < ActiveRecord::Base
       sleep 0.25 # slow down requests to petfinder.
       raise 'Invalid image url' if self.petfinder_url.include?('///')
       image = RestClient.get(self.petfinder_url)
-      create_aws_object(self.aws_resource_name, image)
+      create_aws_object(image)
     rescue
       puts "There was a problem with Image #{self.id}"
       self.delete

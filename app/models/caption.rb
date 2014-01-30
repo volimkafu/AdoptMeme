@@ -32,7 +32,7 @@ class Caption < ActiveRecord::Base
       draw_top_text unless self.top_text.blank?
       draw_bottom_text unless self.bottom_text.blank?
       draw_watermark
-      create_aws_object(aws_resource_name, source.to_blob)
+      create_aws_object(source.to_blob)
     end
 
     def source

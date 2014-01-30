@@ -5,6 +5,7 @@ AdoptMeme::Application.routes.draw do
   namespace :api do
     resources :captions, :only => [:create, :index, :new, :show]
     resources :images, :only => [:index]
+    resources :proxy_images, :only => [:show]
   end
 
   get "/:captionid/new", to: "captions#new"

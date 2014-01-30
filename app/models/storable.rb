@@ -30,24 +30,24 @@ module Storable
     self.save
   end
 
-  def create_aws_object(object_name, content)
-    bucket.objects[object_name].write(content)
+  def create_aws_object(content)
+    bucket.objects[aws_resource_name].write(content)
     set_amazon_aws_url
   end
 
-  def update_aws_object(object_name, content)
-    create_aws_object(object_name, content)
+  def update_aws_object(content)
+    create_aws_object(aws_resource_name, content)
     set_amazon_aws_url
   end
 
-  def delete_aws_object(object_name)
-    bucket.objects[object_name].delete
+  def delete_aws_object
+    bucket.objects[aws_resource_name].delete
     self.amazon_aws_url = ""
     self.save
   end
 
-  def get_aws_object(object_name)
-    bucket.objects[object_name].read
+  def get_aws_object
+    bucket.objects[aws_resource_name].read
   end
 
   def empty_bucket
