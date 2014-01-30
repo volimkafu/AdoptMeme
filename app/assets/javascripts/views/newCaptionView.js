@@ -30,34 +30,42 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 				that.uploadImage(caption);
 			},
 			error: function () {
-				alert("you suck");
+				console.log("Error: There was a problem uploading the image data.")
+				AdoptMeme.Routers.router.navigate("/", {trigger: true});
 			}});
 	},
 
 	watermarkImage: function (caption) {
 		var watermark = "AdoptMe.me/" + caption.id;
 		var context = this.$context;
-		context.fontsize = 20;
-		context.fillStyle = "red";
-		this.$context.fillText(watermark, 50, 50);
+		var xpos = this.$canvas.width;
+		var ypos = this.$canvas.height - 5;
+
+		// Add colored background
+		context.fillStyle = "black";
+		context.fillRect(xpos-170, ypos-15, xpos, ypos + 10);
+
+		// Draw watermark text in lower right corner
+		context.fillStyle = "white";
+		context.font = "bold 20px Arial, sans serif";
+		context.textAlign = "right";
+
+		this.$context.fillText(watermark, xpos, ypos);
 	},
 
 	uploadImage: function (caption) {
-		caption.set( {
-			"imgData" : this.$canvas.toDataURL()
-		});
+		caption.set( { "imgData" : this.$canvas.toDataURL() });
+
 		caption.save({},
 			{
-				success:
-					function () {
+				success: function () {
 						var route = "/"+caption.id.toString();
 						AdoptMeme.Routers.router.navigate(route, {trigger: true});
-					},
-
-					error:
-						function () {
-							console.log("There was a problem uploading the photo");
-						}
+				},
+				error: function () {
+						console.log("Error: There was a problem uploading the photo");
+						AdoptMeme.Routers.router.navigate("/", {trigger: true});
+				}
 			}
 		);
 	},
@@ -90,14 +98,12 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	    context.textAlign = "center";
 	    context.font = "bold 60px Impact, sans-serif";
 	    context.lineWidth = 3;
-	    context.fontsize = 75;
 	    context.fillStyle = "white";
 	    context.strokeStyle = "black";
 
 	    drawTopText(topText, center_x, 65);
 
 	    context.lineWidth = 2.5;
-	    context.fontsize = 75;
 	    drawBottomText(bottomText, center_x);
 	  }
 
