@@ -39,7 +39,7 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	  var context = canvas.getContext('2d');
 
 	  var background = new Image();
-	  background.src = this.model.attributes.amazon_aws_url;
+	  background.src = "/api/proxy_images/" + this.model.attributes.id;
 
 	  // Make sure the image is loaded first otherwise nothing will draw.
 	  background.onload = function(){
