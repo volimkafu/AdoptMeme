@@ -75,7 +75,7 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 	configureEditor: function () {
 	  var canvas = this.$canvas = $("#catCanvas")[0];
 	  var context = this.$context = canvas.getContext("2d");
-    this.maxLineLength = 30;
+    this.maxLineLength = 25;
 
 	  var background = this.background = new Image();
 	  background.src = "/api/proxy_images/" + this.model.attributes.id;
@@ -101,27 +101,67 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
     context.drawImage(this.background,0,0);
     context.lineJoin = "bevel";
 
-    var center_x = this.center_x = canvas.width / 2;
+    this.center = canvas.width / 2;
 
     context.textAlign = "center";
     context.lineWidth = 5;
     context.fillStyle = "white";
     context.strokeStyle = "black";
 
-    this.drawTopText(topText, center_x, 75);
+    this.drawTopText(topText);
 
     context.lineWidth = 2.5;
-    this.drawSingleLineBottomText(bottomText, center_x);
+    this.drawBottomText(bottomText);
   },
 
-  drawTopText: function (toptext, centerx) {
+  drawTopText: function (toptext) {
     var lines = this.buildLines(toptext);
-    console.log(lines);
     if (lines.length > 1) {
       this.drawMultiLineTopText(lines);
     } else {
-      this.drawSingleLineTopText(toptext, centerx);
+      this.configureTextSize(toptext);
+      this.drawSingleLineText(toptext, 0.9*this.$context.fontsize);
     }
+  },
+
+  drawBottomText: function (bottomText) {
+    var lines = this.buildLines(bottomText);
+    var canvas = this.$canvas;
+    if (lines.length > 1) {
+      this.drawMultiLineBottomText(lines);
+    } else {
+      this.configureTextSize(bottomText);
+      this.drawSingleLineText(bottomText, canvas.height - 25);
+    }
+  },
+
+  drawMultiLineBottomText: function (lines) {
+    var that = this;
+    var line = this.longestLine(lines);
+    this.configureTextSize(line);
+    var startHeight = this.$canvas.height-0.9*this.$context.fontsize*lines.length;
+    var context = this.$context;
+    
+    lines.forEach( function (line, index) {
+      var tempsize = startHeight+index*context.fontsize*0.90;
+      context.fillText(line, that.center, tempsize);
+      context.strokeText(line, that.center, tempsize);
+    });
+
+  },
+
+  drawMultiLineTopText: function (lines) {
+    var that = this;
+    var line = this.longestLine(lines);
+    this.configureTextSize(line);
+    var startHeight = 0.9*this.$context.fontsize;
+    var context = this.$context;
+    
+    lines.forEach( function (line, index) {
+      var tempsize = startHeight+index*context.fontsize*0.90;
+      context.fillText(line, that.center, tempsize);
+      context.strokeText(line, that.center, tempsize);
+    });
   },
 
   configureTextSize: function (text) {
@@ -131,54 +171,18 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
     context.fontsize = 80;
     context.font = "bold "+context.fontsize+"px Impact, sans-serif";
 
-    while (context.measureText(text).width > (canvas.width - 20)) {
+    while (context.measureText(text).width > (canvas.width-30)) {
       context.fontsize = context.fontsize - 2;
       context.lineWidth = Math.max.apply(null, [context.lineWidth - 0.2, 2]);
       context.font = "bold "+context.fontsize+"px Impact, sans-serif";
     }
   },
 
-  drawMultiLineTopText: function (lines) {
-    var that = this;
-    var startHeight = 50;
-    var line = this.longestLine(lines);
+  drawSingleLineText: function (text, ypos) {
     var context = this.$context;
-    var canvas = this.$canvas;
-    
-    this.configureTextSize(line);
 
-
-    lines.forEach( function (line, index) {
-      var tempsize = startHeight+index*context.fontsize*0.90;
-      context.fillText(line, that.center_x, tempsize);
-      context.strokeText(line, that.center_x, tempsize);
-    })
-  },
-
-  drawSingleLineText: function (text, xpos, ypos) {
-  	var context = this.$context;
-  	var canvas = this.$canvas;
-    var startText = text.slice(0,30);
-
-    this.configureTextSize(startText);
-
-    context.fillText(startText, xpos, ypos);
-    context.strokeText(startText, xpos, ypos);
-    return context.fontsize;
-  },
-
-  drawSingleLineTopText: function (text, xpos) {
-    this.drawSingleLineText(text.slice(0,30), xpos, 100);
-  },
-
-  drawSingleLineBottomText: function (text, xpos) {
-  	var canvas = this.$canvas;
-    var lines = Math.ceil(text.length/30);
-    var ypos = canvas.height - lines*30;
-    for (var i=0; i < lines; i++) {
-      this.drawSingleLineText(text.slice(i*30, (i+1)*30), xpos, ypos);
-      ypos += 40;
-    }
+    context.fillText(text, this.center, ypos);
+    context.strokeText(text, this.center, ypos);
   },
 
   wordSplit: function (str) {
@@ -188,13 +192,13 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
 
     words.forEach( function (word) {
       if (word.length >= that.maxLineLength) {
-        var chunker = new RegExp('.\{1,'+that.maxLineLength+'\}', 'g');
+        var chunker = new RegExp(".{1,"+that.maxLineLength+"}", "g");
         var chunks = word.match(chunker);
         newWords = newWords.concat(chunks);
       } else {
         newWords.push(word);
       }
-    })
+    });
 
     return newWords;
   },
@@ -206,8 +210,6 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
     var currentLine = [];
 
     while (words.length !== 0) {
-      console.log('loop')
-      console.log(words[0].length);
       var newstr = currentLine.concat(words[0]).join(" ");
       
       if (newstr.length > maxLineLength) {
@@ -225,10 +227,11 @@ AdoptMeme.Views.newCaptionView = Backbone.View.extend({
   longestLine: function (lines) {
      var longest = lines[0];
      for (var i = 0; i < lines.length; i++) {
-        if (longest.length < lines[i].length) {
+        if (this.$context.measureText(longest).width < this.$context.measureText(lines[i]).width) {
           longest = lines[i];
         }
      }
+     console.log(longest);
      return longest;
   },
 
