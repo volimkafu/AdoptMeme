@@ -9,17 +9,19 @@ AdoptMeme.Views.captionShowView = Backbone.View.extend({
   },
 
   render: function () {
+    var renderedContent, pet, petAdoptionInfoView;
     var innerContainer = $("<div class='inner-container'>");
     var caption = this.model;
 
-    if (caption) {
-      var renderedContent = $(this.template({ caption: caption.attributes }));
-      var pet = AdoptMeme.pets.get({id: caption.attributes.pet_id });
-      // var pet = new AdoptMeme.Models.pet({id: caption.attributes.pet_id});
+    if (typeof caption === "object") {
+      renderedContent = $(this.template({ caption: caption.attributes }));
+      pet = AdoptMeme.pets.get({id: caption.attributes.pet_id });
+      petAdoptionInfoView = new AdoptMeme.Views.petAdoptionInfoView({model: pet});
       pet.set({"image_id": caption.attributes.image_id});
-      var petAdoptionInfoView = new AdoptMeme.Views.petAdoptionInfo({model: pet});
       innerContainer.append(renderedContent);
       innerContainer.append(petAdoptionInfoView.render().$el);
+    } else {
+      throw "captionShowView cannot render without a defined caption";
     }
 
     this.$el.html(innerContainer);

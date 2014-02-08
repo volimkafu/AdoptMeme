@@ -1,4 +1,4 @@
-AdoptMeme.Views.petAdoptionInfo = Backbone.View.extend({
+AdoptMeme.Views.petAdoptionInfoView = Backbone.View.extend({
   className: "pet-description",
 
   template: JST["pets/adoption"],
