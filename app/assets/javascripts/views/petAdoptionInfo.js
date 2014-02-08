@@ -1,5 +1,5 @@
 AdoptMeme.Views.petAdoptionInfo = Backbone.View.extend({
-  className: 'pet-description',
+  className: "pet-description",
 
   template: JST["pets/adoption"],
 
@@ -7,7 +7,7 @@ AdoptMeme.Views.petAdoptionInfo = Backbone.View.extend({
     var that = this;
     var renderedContent = this.template({ pet: that.model.attributes });
     this.$el.html(renderedContent);
-    return this
+    return this;
   }
 
-})
+});
