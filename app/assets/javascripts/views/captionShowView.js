@@ -9,14 +9,14 @@ AdoptMeme.Views.captionShowView = Backbone.View.extend({
   },
 
   render: function () {
-    var renderedContent, pet, petAdoptionInfoView;
+    var renderedContent, pet;
     var innerContainer = $("<div class='inner-container'>");
     var caption = this.model;
 
     if (typeof caption === "object") {
       renderedContent = $(this.template({ caption: caption.attributes }));
       pet = AdoptMeme.pets.get({id: caption.attributes.pet_id });
-      petAdoptionInfoView = new AdoptMeme.Views.petAdoptionInfoView({model: pet});
+      this.petAdoptionInfoView = new AdoptMeme.Views.petAdoptionInfoView({model: pet});
       pet.set({"image_id": caption.attributes.image_id});
       innerContainer.append(renderedContent);
       innerContainer.append(petAdoptionInfoView.render().$el);
@@ -26,5 +26,11 @@ AdoptMeme.Views.captionShowView = Backbone.View.extend({
 
     this.$el.html(innerContainer);
 		return this;
+  },
+
+  close: function () {
+    this.petAdoptionInfoView.close()
+    this.stopListening();
+    this.remove();
   }
 });

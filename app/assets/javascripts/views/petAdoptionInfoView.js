@@ -8,6 +8,10 @@ AdoptMeme.Views.petAdoptionInfoView = Backbone.View.extend({
     var renderedContent = this.template({ pet: that.model.attributes });
     this.$el.html(renderedContent);
     return this;
+  },
+
+  close: function () {
+    this.remove();
   }
 
 });
